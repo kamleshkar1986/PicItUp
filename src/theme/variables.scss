@@ -238,6 +238,9 @@
   body {
     /*Import for bootstrap customisation*/
     @import "bootstrap-custom.scss";
+
+    --ion-background-color: #f3f1f1 !important;
+    --ion-background-color-rgb: 255,255,255 !important; 
   }
 }
 

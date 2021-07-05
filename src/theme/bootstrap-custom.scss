@@ -22,10 +22,60 @@ $carousel-control-color:  #1e2d7d;
 $color: #ffffff;
 
 
-// @import "bootstrap/scss/_functions";
-// @import "bootstrap/scss/_variables";
-// @import "bootstrap/scss/mixins/_breakpoints";
+
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
 @import "bootstrap/scss/bootstrap.scss";
+
+ .orange {
+    background-color: $orange;
+  }
+  
+  .purple {
+    background-color: $purple
+    ;
+  }
+  
+  .teal {
+    background-color: $teal;
+  }
+  
+  .blue {
+    background-color: $blue;
+  }
+  
+  .red {
+    background-color: $red-300    ;
+  }
+  
+  .pink {
+    background-color: $pink;
+  }
+
+  .orange-color {
+    color: $orange;
+  }
+  
+  .purple-color {
+    color: $purple;
+  }
+  
+  .teal-color {
+    color: $teal;
+  }
+  
+  .blue-color {
+    color: $blue;
+  }
+  
+  .red-color {
+    color: $red-300 
+  }
+  
+  .pink-color {
+    color: $pink;
+  }
 
 
 // @include media-breakpoint-up(sm) {   
