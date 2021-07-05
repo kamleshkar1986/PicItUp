@@ -26,5 +26,8 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 /* Google font*/
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import '../node_modules/bootstrap/scss/_functions';
+@import '../node_modules/bootstrap/scss/_variables';
+@import '../node_modules/bootstrap/scss/mixins/_breakpoints';
 

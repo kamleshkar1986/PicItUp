@@ -1,0 +1,43 @@
+// $theme-colors: (
+//   "dark" : #1e2d7d,
+//   "light" : #ffffff,
+//   "secondary" : #a3afef  
+// );
+$dark: #1e2d7d;
+
+$light: #ffffff;
+
+$primary: #00badb;
+
+$btn-link-color: #ffffff;
+
+$btn-font-weight: "bolder";
+
+$btn-link-hover-color:#c0b6b6;
+
+$carousel-indicator-active-bg:#ffffff;
+
+$carousel-control-color:  #1e2d7d;
+
+$color: #ffffff;
+
+
+// @import "bootstrap/scss/_functions";
+// @import "bootstrap/scss/_variables";
+// @import "bootstrap/scss/mixins/_breakpoints";
+@import "bootstrap/scss/bootstrap.scss";
+
+
+// @include media-breakpoint-up(sm) {   
+//     .carousel-caption {
+//     font-weight: 900;
+//     background-color: rgba(35, 119, 148, 0.6);   
+//   }
+// }
+
+// @include media-breakpoint-down(sm) { 
+//     .cap-head {
+//         font-weight: 900;
+//         background-color: rgba(35, 119, 148, 0.6); 
+//     }       
+// }

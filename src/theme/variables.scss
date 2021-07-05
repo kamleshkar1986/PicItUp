@@ -146,7 +146,7 @@
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
 
-    --ion-font-family : "Raleway", sans-serif;
+    --ion-font-family : "Montserrat", sans-serif;
   }
 
   /*
@@ -235,4 +235,10 @@
 
     --ion-card-background: #1e1e1e;
   }
+  body {
+    /*Import for bootstrap customisation*/
+    @import "bootstrap-custom.scss";
+  }
 }
+
+
