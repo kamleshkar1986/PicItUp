@@ -76,7 +76,7 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
-@media (prefers-color-scheme: dark) {
+
   /*
    * Dark Colors
    * -------------------------------------------
@@ -157,7 +157,7 @@
   .ios body {
     --ion-background-color: #000000;
     --ion-background-color-rgb: 0,0,0;
-
+    --ion-color-light-contrast: #ffffff;
     --ion-text-color: #ffffff;
     --ion-text-color-rgb: 255,255,255;
 
@@ -234,14 +234,16 @@
     --ion-tab-bar-background: #1f1f1f;
 
     --ion-card-background: #1e1e1e;
-  }
-  body {
-    /*Import for bootstrap customisation*/
-    @import "bootstrap-custom.scss";
+  }  
 
-    --ion-background-color: #f3f1f1 !important;
-    --ion-background-color-rgb: 255,255,255 !important; 
-  }
+
+body {
+  /*Import for bootstrap customisation*/
+  @import "bootstrap-custom.scss";
+
+  --ion-background-color: #f3f1f1 !important;
+  --ion-background-color-rgb: rgb(243,241,241) !important; 
+  --ion-font-family : "Montserrat", sans-serif;
 }
 
 
