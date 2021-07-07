@@ -17,3 +17,12 @@
   font-weight: 900;
   background-color: rgba(35, 119, 148, 0.6);   
 }
+
+.card {
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-clip: padding-box;
+}
+
