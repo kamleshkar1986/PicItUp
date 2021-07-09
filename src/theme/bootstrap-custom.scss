@@ -76,18 +76,3 @@ $color: #ffffff;
   .pink-color {
     color: $pink;
   }
-
-
-// @include media-breakpoint-up(sm) {   
-//     .carousel-caption {
-//     font-weight: 900;
-//     background-color: rgba(35, 119, 148, 0.6);   
-//   }
-// }
-
-// @include media-breakpoint-down(sm) { 
-//     .cap-head {
-//         font-weight: 900;
-//         background-color: rgba(35, 119, 148, 0.6); 
-//     }       
-// }
