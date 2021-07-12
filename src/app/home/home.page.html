@@ -8,8 +8,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand fw-bolder ms-2 ms-md-5" href="#">PicItUp</a>
-        <div class="flex-row-reverse me-2 mt-2 d-block d-md-none">
-          <i class="fa fa-user-circle fs-3"></i>
+        <div class="flex-row-reverse me-2 mt-2 d-block d-md-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button class="bg-transparent"><i class="fa fa-user-circle fs-3"></i></button>          
         </div>
         <div class="flex-row-reverse me-5 mt-2 d-none d-md-block">
           <div class="row">
@@ -19,7 +19,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <button class="btn btn-link fw-bold" type="submit">My Account <i class="fa fa-angle-down"></i></button>
+              <button class="btn btn-link fw-bold "  data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit">My Account <i class="fa fa-angle-down"></i></button>
             </div>
           </div>          
         </div>  
@@ -316,6 +316,57 @@
   <!-- Copyright -->
 </footer>
 <!-- Footer -->
+
+  <div class="modal fade" id="exampleModal" tabindex="-1"> 
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg text-light rounded-3">
+        <div class="modal-header text-center border-bottom-0">
+          <p class="col-12 modal-title text-center fs-3 fw-bold">Login</p>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-12 fs-6 m-1">User Name</div>
+              <div class="input-group col-12 m-1">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 fs-6 m-1">Password</div>
+              <div class="input-group col-12 m-1">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-12 fs-6 m-1 text-center"><button class="btn btn-light text-dark shadow-lg fw-bold">Sign In</button></div>
+            </div>
+            <div class="row m-3">
+              <div class="col-12 fs-6 m-1 text-center">Or Sign In Using</div>
+              <div class="col-12 fs-1 m-1 text-center">
+                <i class="fa fa-facebook-square p-2 blue-color rounded-3 shadow bg-light me-2 social"></i>
+                <i class="fa fa-google p-2 red-color rounded-3 shadow bg-light social"></i>
+              </div>
+            </div>
+            <div class="row m-3  justify-content-center text-dark">
+              <div class="col-12 fs-5 p-1 text-center bg-light w-75 rounded-pill fw-bold w-25">PicItUp</div>
+            </div>
+            <div class="row m-3">
+              <div class="col-12 fs-6 m-1 text-center">Don't have an account yet?</div>
+              <div class="col-12 fs-6 m-1 text-center"><button class="btn btn-link btn-lg">Sign Up</button></div>
+            </div>            
+          </div>
+        </div>
+        <div class="modal-footer border-top-0">
+          <!-- <button class="btn btn-primary text-light rounded-0 fw-bold">Sign In</button> -->
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>  
   
 </ion-content>
 
