@@ -21,8 +21,6 @@ $carousel-control-color:  #1e2d7d;
 
 $color: #ffffff;
 
-$box-shadow-lg: 0 1rem 3rem rgba(#1e2d7d, 1);
-
 
 
 @import "bootstrap/scss/_functions";
@@ -72,14 +70,9 @@ $box-shadow-lg: 0 1rem 3rem rgba(#1e2d7d, 1);
   }
   
   .red-color {
-    color: $red 
+    color: $red-300 
   }
-
+  
   .pink-color {
     color: $pink;
   }
-
-  .modal-backdrop {
-    z-index: -1;
-  }
-
