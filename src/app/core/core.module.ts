@@ -1,20 +1,26 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { AuthGuard } from './guard/auth.guard';
+import { NoAuthGuard } from './guard/no-auth.guard';
+import { throwIfAlreadyLoaded } from './guard/module-import.guard';
 
+import { TokenInterceptor } from './interceptor/token.interceptor';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    HttpClientModule
+  imports: [HttpClientModule],
+  providers: [
+    AuthGuard,
+    NoAuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ]
 })
-export class CoreModule { }
-
-// In short, when using a Core Module:
-// DO import modules that should be instantiated once in your app.
-// DO place services in the module, but do not provide them.
-// DO NOT declare components, pipes, directives.
-// DO NOT import the CoreModule into any modules other than the AppModule.
+export class CoreModule {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  }
+}
