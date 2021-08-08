@@ -5,8 +5,10 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
-import { ProductListComponent } from './product-list/product-list.component'
-import { ProductItemComponent } from './product-list/product-item/product-item.component'
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductItemComponent } from './product-list/product-item/product-item.component';
+import { ProductCarousalComponent } from './product-carousal/product-carousal.component';
+import { CarousalItemComponent } from './product-carousal/carousal-item/carousal-item.component';
 import { SharedModule } from '@shared/shared.module';
 
 
@@ -18,6 +20,6 @@ import { SharedModule } from '@shared/shared.module';
     HomePageRoutingModule,
     SharedModule
   ],
-  declarations: [HomePage, ProductListComponent, ProductItemComponent]
+  declarations: [HomePage, ProductListComponent, ProductItemComponent, ProductCarousalComponent, CarousalItemComponent]
 })
 export class HomePageModule {}

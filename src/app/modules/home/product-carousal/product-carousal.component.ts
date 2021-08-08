@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Product } from '@data/schema/product';
 
 @Component({
   selector: 'app-product-carousal',
@@ -7,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductCarousalComponent implements OnInit {
 
+  @Input() products: Product[];
   constructor() { }
-
-  ngOnInit() {}
-
+  ngOnInit() { }
 }

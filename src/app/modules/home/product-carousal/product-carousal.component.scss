@@ -1,0 +1,18 @@
+.carousel {
+  max-height: 500px;
+}
+  
+.carousel-item {
+  background-color:rgb(0, 0, 0);   
+}
+
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
+
+@include media-breakpoint-down(sm) { 
+    .carousel {
+        min-height: 400px;
+    }
+}
