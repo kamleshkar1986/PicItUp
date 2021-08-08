@@ -1,0 +1,10 @@
+<div class="card my-2 w-100 rounded-3" 
+style="background-image: linear-gradient(rgba(0,0,0, 0.36),rgba(0,0,0, 0.20)),url('assets/images/cards/{{product.tileImgFile}}');" >
+  <div class="card-body">
+    <h5 class="card-title fs-3 fw-bold rounded-3">{{product.title}}</h5>            
+    <p class="card-text d-inline-block px-2 rounded-3" [ngStyle]="{'background-color' : product.dispColor}">Rs. {{product.price}}</p>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-light rounded-0 fw-bold" [ngStyle]="{'color' : product.dispColor}">Order Now</button>
+    </div>            
+  </div>
+</div>
