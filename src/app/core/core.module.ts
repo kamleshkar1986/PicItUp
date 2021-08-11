@@ -10,6 +10,11 @@ import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
   imports: [
     CommonModule,
     HttpClientModule
-  ]
+  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpTokenInterceptor,
+    multi: true
+  }]
 })
 export class CoreModule { }

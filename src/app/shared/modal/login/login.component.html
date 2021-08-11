@@ -7,23 +7,8 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-12 fs-6 m-1">User Name</div>
-            <div class="input-group col-12 m-1">
-              <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-              <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 fs-6 m-1">Password</div>
-            <div class="input-group col-12 m-1">
-              <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
-              <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col-12 fs-6 m-1 text-center"><button class="btn btn-light text-dark shadow-lg fw-bold">Sign In</button></div>
-          </div>
+          <app-signin *ngIf="authMode === AuthMode.SignIn"></app-signin>
+          <app-signup *ngIf="authMode === AuthMode.SignUp"></app-signup>
           <div class="row m-3">
             <div class="col-12 fs-6 m-1 text-center">Or Sign In Using</div>
             <div class="col-12 fs-1 m-1 text-center">
@@ -35,8 +20,14 @@
             <div class="col-12 fs-5 p-1 text-center bg-light w-75 rounded-pill fw-bold w-25">PicItUp</div>
           </div>
           <div class="row m-3">
-            <div class="col-12 fs-6 m-1 text-center">Don't have an account yet?</div>
-            <div class="col-12 fs-6 m-1 text-center"><button class="btn btn-link btn-lg">Sign Up</button></div>
+            <div class="col-12 fs-6 m-1 text-center">
+              {{authMode === AuthMode.SignIn? "Don't have an account yet?" : "Already have an account?"}}
+            </div>
+            <div class="col-12 fs-6 m-1 text-center">
+              <button (click)="toggleAuthMode()" class="btn btn-link btn-lg">
+                {{authMode === AuthMode.SignIn? "Sign Up" : "Sign In"}}
+              </button>
+            </div>
           </div>            
         </div>
       </div>
