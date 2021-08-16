@@ -1,42 +1,92 @@
-<form #signupForm="ngForm">
+<form name="signUpForm" #suF="ngForm"  [mustMatch]="['password', 'password2']" (ngSubmit)="onSubmit(suF)">
   <div class="row mb-2">
     <div class="col-12 fs-6 m-1">First Name</div>
     <div class="input-group col-12 m-1">
       <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-      <input ngModel required  pattern="/[^a-z ]*$/gmi" name="firstName" type="text" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon1">
+      <input 
+        required maxlength="50" [(ngModel)]="user.firstName" #firstName="ngModel"
+        name="firstName" 
+        type="text" 
+        class="form-control" 
+        placeholder="First Name"         
+        aria-label="First Name" 
+        aria-describedby="basic-addon1"/>
+    </div>
+    <div *ngIf="suF.submitted && firstName.invalid" class="alert alert-danger col-12 px-2 py-0 my-0 mx-3">
+      Please enter valid first name!
     </div>
   </div>
   <div class="row mb-2">
     <div class="col-12 fs-6 m-1">Last Name</div>
     <div class="input-group col-12 m-1">
       <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-      <input ngModel required  pattern="/[^a-z ]*$/gmi" name="lastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1">
+      <input 
+        required maxlength="50" [(ngModel)]="user.lastName" #lastName="ngModel"
+        name="lastName" 
+        type="text" 
+        class="form-control" 
+        placeholder="Last Name"         
+        aria-label="Last Name" 
+        aria-describedby="basic-addon1"/>
+    </div>
+    <div *ngIf="suF.submitted && lastName.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+      Please enter valid last name!
     </div>
   </div>
   <div class="row mb-2">
     <div class="col-12 fs-6 m-1">Email ID</div>
     <div class="input-group col-12 m-1">
-      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-      <input ngModel required email name="email" type="text" class="form-control" placeholder="Email ID" aria-label="Email ID" aria-describedby="basic-addon1">
+      <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+      <input 
+        required email maxlength="50" [(ngModel)]="user.email" #eMail="ngModel"
+        name="email" 
+        type="email" 
+        class="form-control" 
+        placeholder="EMail"         
+        aria-label="EMail" 
+        aria-describedby="basic-addon1"/>
+    </div>
+    <div *ngIf="suF.submitted && eMail.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+      Please enter valid email ID!
     </div>
   </div>
   <div class="row">
     <div class="col-12 fs-6 m-1">Password</div>
     <div class="input-group col-12 m-1">
       <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
-      <input ngModel required minlength="6" name="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+      <input 
+        name="password" 
+        type="password" 
+        required minlength="6" maxlength="50" [(ngModel)]="user.password" #password="ngModel"
+        class="form-control" 
+        placeholder="Password" 
+        aria-label="Password" 
+        aria-describedby="basic-addon1"/>
+    </div>
+    <div *ngIf="suF.submitted && password.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+      Please enter valid password!
     </div>
   </div>
   <div class="row">
     <div class="col-12 fs-6 m-1">Confirm Password</div>
     <div class="input-group col-12 m-1">
       <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
-      <input ngModel required name="password2" type="password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1">
+      <input 
+      name="password2" 
+      type="password" 
+      ngModel #password2="ngModel"     
+      class="form-control" 
+      placeholder="Password" 
+      aria-label="Password" 
+      aria-describedby="basic-addon1"/>
+    </div>
+    <div *ngIf="suF.submitted && password2.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+      Your password did not match!
     </div>
   </div>
   <div class="row mt-4">
     <div class="col-12 fs-6 m-1 text-center">
-      <button class="btn btn-light text-dark shadow-lg fw-bold" [disabled]="!signupForm.valid">Sign Up</button>
+      <button class="btn btn-light text-dark shadow-lg fw-bold" >Sign Up</button>
     </div>
   </div>
 </form>

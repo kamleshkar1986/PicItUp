@@ -15,7 +15,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
-    console.log('In interceptor');
+       
     const token = this.jwtService.getToken();
 
     if (token) {

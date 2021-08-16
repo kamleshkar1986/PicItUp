@@ -1,0 +1,28 @@
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
+
+  .icon-box {
+    font-size: 5rem;
+}
+  .modal-header {
+      background-color: #47c9a2;
+  }
+
+  .modal-body {
+      background-color: #ffffff;
+      color: #000000 !important;
+  }
+
+  .modal-confirm .modal-content {
+    padding: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none
+}
+
+.btn-outline {
+    color: black !important;
+    border-color: black;
+}

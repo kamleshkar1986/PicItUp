@@ -15,8 +15,7 @@ export class HomePage implements OnInit {
   ngOnInit() {   
     this.prodService.get()
     .subscribe(prod => {
-      this.products = prod;
-      console.log(this.products);
+      this.products = prod;    
     });
   }
 }

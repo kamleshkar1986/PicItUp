@@ -1,0 +1,16 @@
+<div *ngIf="showModal" id="alertModal" class="modal fade show d-block" aria-modal="true">
+	<div class="modal-dialog modal-dialog-centered modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header justify-content-center">
+				<div class="icon-box">
+					<i class="fa fa-check-circle"></i>
+				</div>			
+			</div>
+			<div class="modal-body text-center">
+				<h4>Great!</h4>	
+				<p>Your account has been created successfully.</p>
+				<button class="btn btn-outline" data-bs-dismiss="modal" (click)="closeAlert()">Go Back</button>
+			</div>
+		</div>
+	</div>
+</div>
