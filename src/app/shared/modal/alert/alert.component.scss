@@ -2,13 +2,21 @@
 @import "bootstrap/scss/_variables";
 @import "bootstrap/scss/mixins/_breakpoints";
 
+.modal {
+  z-index: 2000 !important;
+}
 
   .icon-box {
     font-size: 5rem;
 }
-  .modal-header {
+
+    .error-bg {
+      background-color: #f15e5e;
+    }
+    .succ-bg {
       background-color: #47c9a2;
-  }
+    }      
+
 
   .modal-body {
       background-color: #ffffff;

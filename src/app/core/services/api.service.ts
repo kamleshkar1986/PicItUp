@@ -15,8 +15,7 @@ export class ApiService {
     private jwtService: JwtService
   ) {}
 
-  private formatErrors(error: any) {
-    console.log('EndPOint Error');
+  private formatErrors(error: any) {   
     return  throwError(error.error);
   }
 

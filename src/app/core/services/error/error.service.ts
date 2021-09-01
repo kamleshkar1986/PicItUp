@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorMesg } from '.';
 
 @Injectable({
     providedIn: 'root'
@@ -9,8 +10,9 @@ export class ErrorService {
     getClientMessage(error: Error): string {
         if (!navigator.onLine) {
             return 'No Internet Connection';
-        }
-        return error.message ? error.message : error.toString();
+        }        
+        const errorResp: ErrorMesg = <any>error;     
+        return errorResp?.data[0]?.msg ? errorResp.data[0].msg : errorResp.message ? errorResp.message : errorResp.toString();
     }
 
     getClientStack(error: Error): string {
