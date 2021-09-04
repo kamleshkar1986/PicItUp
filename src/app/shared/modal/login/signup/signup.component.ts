@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
     if(signUp.valid) {        
       this.userService.register(this.user)
       .subscribe(user => {
-        this.user = user;            
+        signUp.reset();    
       });     
     }   
   }
