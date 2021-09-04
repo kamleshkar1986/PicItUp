@@ -5,9 +5,16 @@ export enum NotificationType {
     Warning = 3
 }
 
+export class NoteEvent {
+    public static Server = "Server";
+    public static Client = "Server";
+    public static Auth = "Auth";
+}
+
 export interface NotificationMesg {
     mesgType: NotificationType,
     mesgHead: string,
+    errorEvent: NoteEvent,
     mesg: string,    
 }
 

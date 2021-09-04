@@ -1,7 +1,7 @@
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { LoggingService, ErrorService, NotificationService } from './error';
+import { LoggingService, ErrorService, NotificationService, ErrorMesg, NotificationMesg } from './error';
 
 @Injectable()
 export class GlobalErrorHandlerService implements ErrorHandler {
@@ -18,20 +18,22 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
         let message;
         let stackTrace;
+        let notify: NotificationMesg;         
 
         if (error instanceof HttpErrorResponse) {
-            // Server Error
-            message = errorService.getServerMessage(error);
-            stackTrace = errorService.getServerStack(error);            
+            // Server Error     
+            notify = errorService.getServerMessage(error);
+            stackTrace = errorService.getServerStack(error);     
         } else {
             // Client Error
-            message = errorService.getClientMessage(error);
-            stackTrace = errorService.getClientStack(error);            
-        }        
-        notifier.showError(message);
+            notify = errorService.getClientError(error);            
+            stackTrace = errorService.getClientStack(error);                    
+        }      
+        notifier.showError(notify);                 
+        
         // Always log errors
         logger.logError(message, stackTrace);
 
-        console.error(error);
+        //console.error(error);
     }
 }

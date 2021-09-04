@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NotificationMesg, NotificationService } from '@core/services/error';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { NoteEvent, NotificationMesg, NotificationService, NotificationType } from '@core/services/error';
 import { Subscription } from 'rxjs';
 
 export enum AuthMode {
@@ -16,6 +16,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   AuthMode = AuthMode;
   authMode: AuthMode; 
+  public get mesgType(): typeof NotificationType {
+    return NotificationType; 
+  }
+  public get nevent(): typeof NoteEvent {
+    return NoteEvent; 
+  }
+
 
   showModal: boolean = false;  
 
@@ -23,14 +30,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private alertSub: Subscription; 
   
-  constructor(private notify: NotificationService) { }
+  constructor(private notify: NotificationService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.authMode = AuthMode.SignIn;
-    this.errMesg = null;
-    this.alertSub = this.notify.errorPopUp.subscribe(message => {
+    this.errMesg = null;    
+    this.alertSub = this.notify.errorPopUp.subscribe(message => {     
       this.errMesg = message;
-    });
+      this.cd.detectChanges();
+    });   
   }
 
   toggleAuthMode() {

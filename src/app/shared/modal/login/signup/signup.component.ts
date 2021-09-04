@@ -19,11 +19,11 @@ export class SignupComponent implements OnInit {
 
 
   onSubmit(signUp: NgForm) {
-    if(signUp.valid) {
+    if(signUp.valid) {        
       this.userService.register(this.user)
       .subscribe(user => {
-        this.user = user;    
-      });
+        this.user = user;            
+      });     
     }   
   }
 

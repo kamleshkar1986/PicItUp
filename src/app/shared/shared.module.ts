@@ -10,6 +10,7 @@ import { SigninComponent } from '@shared/modal/login/signin/signin.component';
 import { AlertComponent } from '@shared/modal/alert/alert.component';
 
 import { MustMatchDirective } from './directives/must-match.directive';
+import { SpinnerComponent } from './modal/spinner/spinner.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MustMatchDirective } from './directives/must-match.directive';
     SignupComponent,
     SigninComponent,
     AlertComponent,
+    SpinnerComponent,
     MustMatchDirective
   ],
   imports: [

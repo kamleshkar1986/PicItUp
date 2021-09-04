@@ -1,17 +1,17 @@
 import { Injectable} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { NotificationType, NotificationMesg } from './error-data'
+import { NotificationType, NotificationMesg, ErrorMesg } from './error-data'
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  mesgData: NotificationMesg = {mesg : "", mesgHead: "", mesgType: NotificationType.None};
+  private mesgData: NotificationMesg = {mesg : "", mesgHead: "", errorEvent: "", mesgType: NotificationType.None};
 
   errorPopUp = new BehaviorSubject<NotificationMesg>(this.mesgData);
 
-  setMesgData() {    
+  private setMesgData() {    
     this.errorPopUp.next(this.mesgData);  
   }  
   
@@ -19,12 +19,8 @@ export class NotificationService {
     //this.snackBar.open(message);
   }
   
-  showError(message: string): void {    
-    this.mesgData = {
-      mesgType: NotificationType.Error,
-      mesgHead: "Oops!",
-      mesg: message
-    };   
+  showError(notify: NotificationMesg): void {     
+    this.mesgData = notify
     this.setMesgData();   
   }
 }
