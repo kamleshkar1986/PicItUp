@@ -11,6 +11,7 @@ import { AlertComponent } from '@shared/modal/alert/alert.component';
 
 import { MustMatchDirective } from './directives/must-match.directive';
 import { SpinnerComponent } from './modal/spinner/spinner.component';
+import { VerifyOtpComponent } from './modal/verify-otp/verify-otp.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SpinnerComponent } from './modal/spinner/spinner.component';
     SigninComponent,
     AlertComponent,
     SpinnerComponent,
+    VerifyOtpComponent,
     MustMatchDirective
   ],
   imports: [
@@ -31,7 +33,8 @@ import { SpinnerComponent } from './modal/spinner/spinner.component';
   exports: [
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    VerifyOtpComponent
   ]
 })
 export class SharedModule { }

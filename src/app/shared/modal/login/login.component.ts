@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NoteEvent, NotificationMesg, NotificationService, NotificationType } from '@core/services/error';
 import { Subscription } from 'rxjs';
 
@@ -23,20 +23,25 @@ export class LoginComponent implements OnInit, OnDestroy {
     return NoteEvent; 
   }
 
-
-  showModal: boolean = false;  
-
   errMesg: NotificationMesg = null;
 
   private alertSub: Subscription; 
+
+  showPopUp: boolean = true;
+
+  @ViewChild('closebutton', {static: true}) closebutton: ElementRef;
   
   constructor(private notify: NotificationService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.authMode = AuthMode.SignIn;
-    this.errMesg = null;    
+    this.errMesg = null;      
     this.alertSub = this.notify.errorPopUp.subscribe(message => {     
-      this.errMesg = message;
+      this.errMesg = message; 
+      if(this.errMesg.mesgType == NotificationType.Success) {
+        this.closebutton.nativeElement.click(); 
+        this.showPopUp = false;
+      }          
       this.cd.detectChanges();
     });   
   }

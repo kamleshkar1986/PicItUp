@@ -1,0 +1,53 @@
+<div *ngIf="showPopUp" id="alertModal" class="modal fade show d-block" aria-modal="true">
+  <div class="modal-dialog modal-dialog-centered">    
+    <div class="modal-content shadow-lg text-light rounded-3">
+      <div class="modal-header text-center border-bottom-0">
+        <!-- <p class="col-10 ms-4 modal-title text-center fs-3 fw-bold">Verify OTP</p>
+        <button type="button" class="col-2 btn-close btn-close-white mt-0" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        <h5 class="modal-title text-center w-100">Verify OTP</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="dispPopUp(false)"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">         
+          <div class="row m-3 mb-0 justify-content-center">
+            <div class="alert alert-success col-12 px-2 py-0 mx-3 mb-2 text-center">
+              Your account has been created successfully!
+            </div>
+            <div class="alert col-12 px-2 py-0 mx-3 my-0 text-center">
+              An OTP has been sent to <span class="fw-bold">{{otpMailId}}</span>. Please enter to activate your account:
+            </div>
+            <div class="row mb-2">              
+              <div class="input-group col-12 m-1">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+                <input [(ngModel)]="otpInput" type="text" maxlength="4" class="form-control" placeholder="OTP (4 digit)" aria-label="OTP" aria-describedby="basic-addon1">
+              </div>
+              <div *ngIf="invalidInput" class="alert alert-danger col-12 px-2 py-0 my-0 mx-3">
+                OTP must be a 4 digit number!
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-12 fs-6 m-1 text-center">
+                <button class="btn btn-light text-dark shadow-lg fw-bold" (click)="submitOTP()" >Verify OTP</button>      
+              </div>
+            </div>
+          </div>     
+          <div class="row m-3 mt-0">            
+            <div class="col-12 fs-6 m-1 text-center">
+              <button class="btn btn-link btn-md text-center">
+                Resend OTP
+              </button>
+            </div>
+          </div>    
+          <div class="row m-3  justify-content-center text-dark">
+            <div class="col-12 fs-5 p-1 text-center bg-light w-75 rounded-pill fw-bold w-25">PicItUp</div>
+          </div>        
+        </div>
+      </div>
+      <div class="modal-footer border-top-0">
+        <!-- <button class="btn btn-primary text-light rounded-0 fw-bold">Sign In</button> -->
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div> 

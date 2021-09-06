@@ -18,6 +18,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           // refresh token
+          return throwError(error);
         } else {
           return throwError(error);
         }

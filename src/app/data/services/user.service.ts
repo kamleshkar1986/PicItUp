@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { ApiService } from '@core/services';
 import { User } from '../schema/user';
@@ -11,8 +11,9 @@ import { NoteEvent, NotificationMesg, NotificationService, NotificationType } fr
   providedIn: 'root'
 })
 export class UserService {
-
-  private userURLPrefix: string = 'auth';
+  
+  private showVerifyOTPSub = new BehaviorSubject<{requestOTP: boolean, otpMailId: string }>({requestOTP: false, otpMailId: null});
+  public readonly showVerifyOTPObs: Observable<{requestOTP: boolean, otpMailId: string }> = this.showVerifyOTPSub.asObservable();
 
   private notify: NotificationMesg = {
     errorEvent: NoteEvent.Auth,
@@ -36,6 +37,19 @@ export class UserService {
           if(user.status == 1) {
             this.notify.mesg = "You are sucesfully registered!";
             this.notifyServ.showError(this.notify);
+            this.showVerifyOTPSub.next({requestOTP: true, otpMailId: user.data.email});
+          }
+      }));    
+  }
+
+  verifyOTP(otpData: {otp: string, email: string }) {    
+    return this.apiService.post(this.constructUrl('verify-otp'), otpData)
+        .pipe(map(resp => {          
+          if(resp.status == 1) {            
+            this.notify.mesg = "You have successfully logged in!";
+            this.notify.errorEvent = NoteEvent.Server
+            this.notifyServ.showError(this.notify);
+            this.showVerifyOTPSub.next({requestOTP: false, otpMailId: null});
           }
       }));    
   }

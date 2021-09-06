@@ -1,0 +1,25 @@
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
+.modal {
+    z-index: 2000 !important;
+}
+
+.modal-content {
+  background-color: $blue-300;
+  .social {
+    background-color: $gray-100;
+  }
+  .btn-primary {
+    background-color: $blue-500;
+  }
+}
+
+.modal-title{
+  font-weight: 500;  
+}
+
+.btn-close {
+    background-color: #fff1f1;
+}

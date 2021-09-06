@@ -25,7 +25,7 @@ export class AlertComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.alertSub = this.notify.errorPopUp.subscribe(message => {  
       if(message.mesgType != NotificationType.None && message.errorEvent != NoteEvent.Auth) {
-        this.showModal = true;
+        this.showModal = true;       
       }      
       this.message = message;      
       this.cd.detectChanges();

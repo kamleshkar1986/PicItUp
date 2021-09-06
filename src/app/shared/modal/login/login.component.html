@@ -3,7 +3,7 @@
     <div class="modal-content shadow-lg text-light rounded-3">
       <div class="modal-header text-center border-bottom-0">
         <p class="col-12 modal-title text-center fs-3 fw-bold">Login</p>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        <button #closebutton type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
@@ -11,9 +11,8 @@
           <app-signup *ngIf="authMode === AuthMode.SignUp"></app-signup>
           <div class="row m-3">
             <div 
-              *ngIf="this.errMesg.mesgType != mesgType.None && this.errMesg.errorEvent == nevent.Auth" 
-              [ngClass]="{'alert-success': this.errMesg.mesgType == mesgType.Success, 'alert-danger': this.errMesg.mesgType == mesgType.Error}" 
-              class="alert col-12 px-2 py-0 mx-3 my-0">
+              *ngIf="this.errMesg.mesgType == mesgType.Error && this.errMesg.errorEvent == nevent.Auth"
+              class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
               {{this.errMesg.mesg}}
             </div>
             <div class="col-12 fs-6 m-1 text-center">Or Sign In Using</div>
