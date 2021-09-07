@@ -9,6 +9,7 @@ export class NoteEvent {
     public static Server = "Server";
     public static Client = "Server";
     public static Auth = "Auth";
+    public static OTP = "OTP";
 }
 
 export interface NotificationMesg {

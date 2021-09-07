@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { NoteEvent, NotificationService, NotificationType } from '@core/services/error';
 import { UserService } from '@data/services/user.service';
 import { Subscription } from 'rxjs';
 
@@ -13,9 +14,12 @@ export class VerifyOtpComponent implements OnInit, OnDestroy {
   otpMailId: string = null;
   otpInput: string = "";
   invalidInput: boolean = false;
-  userSub: Subscription;
+  message: string = null;
+  private userSub: Subscription;
+  private errorMesgSub: Subscription; 
 
-  constructor(private userServ: UserService, private cd: ChangeDetectorRef) { }
+
+  constructor(private notify: NotificationService, private userServ: UserService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.userSub = this.userServ.showVerifyOTPObs.subscribe(showPopUp => {       
@@ -23,6 +27,16 @@ export class VerifyOtpComponent implements OnInit, OnDestroy {
       this.otpMailId = showPopUp.otpMailId;
       this.cd.detectChanges();
     });   
+
+    this.errorMesgSub = this.notify.errorPopUp.subscribe(message => {  
+      if(
+          message.mesgType != NotificationType.None && 
+          (message.errorEvent == NoteEvent.OTP)
+        ) {
+        this.message = message.mesg;       
+        this.cd.detectChanges();
+      }   
+    });
   }
 
   dispPopUp(show: boolean) {
@@ -43,6 +57,7 @@ export class VerifyOtpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
+    this.errorMesgSub.unsubscribe();
   }
 
 }

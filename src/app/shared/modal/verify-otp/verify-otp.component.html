@@ -24,6 +24,9 @@
               <div *ngIf="invalidInput" class="alert alert-danger col-12 px-2 py-0 my-0 mx-3">
                 OTP must be a 4 digit number!
               </div>
+              <div *ngIf="message" class="alert alert-danger col-12 px-2 py-0 my-0 mx-3">
+                {{message}}
+              </div>
             </div>
             <div class="row mt-2">
               <div class="col-12 fs-6 m-1 text-center">
