@@ -1,22 +1,42 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtService {
 
-  constructor() { }
-
+  private storageKey = {
+    jwtToken: "jwtToken",
+    jwtTokenExpiryDate: "jwtTokenExpiryDate"
+  };
   
-  getToken(): String {
-    return window.localStorage['jwtToken'];
+  constructor() { }
+  
+  getToken(): String {   
+    let expiraTionDate: Date =  null;
+
+    expiraTionDate =  new Date(JSON.parse(localStorage.getItem(this.storageKey.jwtTokenExpiryDate)));    
+    console.log(localStorage.getItem(this.storageKey.jwtTokenExpiryDate));
+    console.log(JSON.parse(localStorage.getItem(this.storageKey.jwtTokenExpiryDate)));
+    console.log(expiraTionDate);
+    console.log(new Date());
+    if(!expiraTionDate || new Date() > expiraTionDate) {
+			return null;
+		}		
+    return localStorage.getItem(this.storageKey.jwtToken);
   }
 
-  saveToken(token: String) {
-    window.localStorage['jwtToken'] = token;
+  saveToken(token: string) {
+    const expiraTionDate = new Date(
+      new Date().getTime() + environment.tokenExpiration * 1000
+    );
+    localStorage.setItem(this.storageKey.jwtToken, token);  
+    localStorage.setItem(this.storageKey.jwtTokenExpiryDate, JSON.stringify(expiraTionDate));      
   }
 
   destroyToken() {
-    window.localStorage.removeItem('jwtToken');
+    localStorage.removeItem(this.storageKey.jwtToken);
+    localStorage.removeItem(this.storageKey.jwtTokenExpiryDate);
   }
 }

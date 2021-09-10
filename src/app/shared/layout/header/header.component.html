@@ -13,7 +13,7 @@
         [attr.data-bs-toggle]="!isAuthenticated? 'modal' : null" 
         [attr.data-bs-target]="!isAuthenticated? '#exampleModal' : null">
         <button class="bg-transparent"><i class="fa fa-user-circle fs-3"></i></button>          
-      </div>
+      </div>    
       <div class="flex-row-reverse me-5 mt-2 d-none d-md-block">
         <div class="row">
           <div class="col text-primary fw-bolder">
@@ -30,10 +30,11 @@
               type="submit">
               My Account <i class="fa fa-angle-down"></i>
             </button>  
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="btnAccount">
+            <ul *ngIf="isAuthenticated" class="dropdown-menu dropdown-menu-end" aria-labelledby="btnAccount">
               <li><a class="dropdown-item" href="#">Action</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>  
             <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown button

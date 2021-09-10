@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
-import { ApiService } from '@core/services';
+import { ApiService, JwtService } from '@core/services';
 import { User } from '../schema/user';
 import { catchError, map } from 'rxjs/operators';
 import { NoteEvent, NotificationMesg, NotificationService, NotificationType } from '@core/services/error';
@@ -28,7 +28,8 @@ export class UserService {
 
   constructor (
     private apiService: ApiService,
-    private notifyServ: NotificationService
+    private notifyServ: NotificationService,
+    private jwtService: JwtService
   ) {}
 
   private constructUrl(apiAction: String) {
@@ -59,7 +60,19 @@ export class UserService {
       }));    
   }
 
+  resendOTP() {    
+    return this.apiService.post(this.constructUrl('resend-verify-otp'), {email: this.loggedInUser.email})
+        .pipe(map(resp => {             
+          if(resp.status == 1) {    
+            this.notify.mesg = "A new otp has been emailed to you.";
+            this.notify.errorEvent = NoteEvent.Server;
+            this.notifyServ.showError(this.notify);
+          }          
+      }));    
+  }
+
   login(user: User): Observable<any> {  
+    this.loggedInUser = user;
     return this.apiService.post(this.constructUrl('login'), user)
       .pipe(map(userResp => {                
         if(userResp.status == 1) {
@@ -70,18 +83,15 @@ export class UserService {
           const expiraTionDate = new Date(
             new Date().getTime() + 2*60*1000
           );
-          this.loggedInUser = new User(
-            userResp.data.firstName, 
-            userResp.data.lastName, 
-            userResp.data.email, 
-            userResp.data.token, 
-            expiraTionDate
-          );
-          this.loggedInUserSub.next(this.loggedInUser);          
+          this.loggedInUser = userResp.data;
+          this.loggedInUserSub.next(this.loggedInUser); 
+          this.jwtService.saveToken(userResp.data.token);  
+          localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));           
         }
       }),
       catchError(err => {         
-        if(err.error.message == "OTP_Pending") {            
+        if(err.error.message == "OTP_Pending") {  
+          this.resendOTP().subscribe();          
           this.promptOTPRequest(user.email);
         }  
         return throwError(err);  
@@ -89,7 +99,23 @@ export class UserService {
     );   
   }
 
-  promptOTPRequest(otpMailId: string) {
+  autoLogin() {
+    this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));        
+    if(this.jwtService.getToken()) {
+      this.loggedInUserSub.next(this.loggedInUser);    
+    }
+  }
+
+  logout() {
+    this.loggedInUser = null;
+    this.loggedInUserSub.next(this.loggedInUser); 
+    this.jwtService.destroyToken();
+    this.notify.mesg = "You are logged out!";
+    this.notify.errorEvent = NoteEvent.Client;
+    this.notifyServ.showError(this.notify);
+  }
+
+  private promptOTPRequest(otpMailId: string) {
     this.notify.mesg = "You are sucesfully registered!";
     //hides the login popup
     this.notifyServ.showError(this.notify);

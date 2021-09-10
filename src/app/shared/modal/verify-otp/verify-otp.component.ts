@@ -44,7 +44,7 @@ export class VerifyOtpComponent implements OnInit, OnDestroy {
   }
 
   submitOTP() {    
-    this.otpMailId = "kamlesh.pikachu@gmail.com";    
+    //this.otpMailId = "kamlesh.pikachu@gmail.com";    
     this.invalidInput = false;
     if(this.otpInput.length < 4 || isNaN(+this.otpInput)) {
       this.invalidInput = true;
@@ -53,6 +53,10 @@ export class VerifyOtpComponent implements OnInit, OnDestroy {
       this.userServ.verifyOTP({email: this.otpMailId, otp: this.otpInput}).subscribe(resp => {
       });
     }   
+  }
+
+  resendOTP() {
+    this.userServ.resendOTP().subscribe();
   }
 
   ngOnDestroy() {
