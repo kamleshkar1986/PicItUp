@@ -16,11 +16,7 @@ export class JwtService {
   getToken(): String {   
     let expiraTionDate: Date =  null;
 
-    expiraTionDate =  new Date(JSON.parse(localStorage.getItem(this.storageKey.jwtTokenExpiryDate)));    
-    console.log(localStorage.getItem(this.storageKey.jwtTokenExpiryDate));
-    console.log(JSON.parse(localStorage.getItem(this.storageKey.jwtTokenExpiryDate)));
-    console.log(expiraTionDate);
-    console.log(new Date());
+    expiraTionDate =  new Date(JSON.parse(localStorage.getItem(this.storageKey.jwtTokenExpiryDate)));  
     if(!expiraTionDate || new Date() > expiraTionDate) {
 			return null;
 		}		

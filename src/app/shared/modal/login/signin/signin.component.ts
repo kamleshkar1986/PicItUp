@@ -20,7 +20,6 @@ export class SigninComponent implements OnInit {
       this.userService.login(this.user)
       .subscribe(user => { signIn.reset()      
       });     
-    }   
+    }  
   }
-
 }

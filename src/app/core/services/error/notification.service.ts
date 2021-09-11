@@ -12,7 +12,7 @@ export class NotificationService {
   errorPopUp = new BehaviorSubject<NotificationMesg>(this.mesgData);
 
   private setMesgData() {    
-    this.errorPopUp.next(this.mesgData);  
+    this.errorPopUp.next(this.mesgData);
   }  
   
   showSuccess(message: string): void {

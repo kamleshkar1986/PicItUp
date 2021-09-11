@@ -9,7 +9,8 @@
         <div class="container-fluid">
           <app-signin *ngIf="authMode === AuthMode.SignIn"></app-signin>
           <app-signup *ngIf="authMode === AuthMode.SignUp"></app-signup>
-          <div class="row m-3">
+          <div class="row">
+            <span class="col-12 fs-1 text-center"><button class="btn btn-link btn-sm" (click)="openPasswordChange()">Forgot Password?</button></span>
             <div 
               *ngIf="this.errMesg.mesgType == mesgType.Error && this.errMesg.errorEvent == nevent.Auth"
               class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">

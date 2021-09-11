@@ -12,6 +12,7 @@ import { AlertComponent } from '@shared/modal/alert/alert.component';
 import { MustMatchDirective } from './directives/must-match.directive';
 import { SpinnerComponent } from './modal/spinner/spinner.component';
 import { VerifyOtpComponent } from './modal/verify-otp/verify-otp.component';
+import { RecoverPasswordComponent } from './modal/recover-password/recover-password.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { VerifyOtpComponent } from './modal/verify-otp/verify-otp.component';
     SignupComponent,
     SigninComponent,
     AlertComponent,
+    RecoverPasswordComponent,
     SpinnerComponent,
     VerifyOtpComponent,
     MustMatchDirective
@@ -34,7 +36,8 @@ import { VerifyOtpComponent } from './modal/verify-otp/verify-otp.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    VerifyOtpComponent
+    VerifyOtpComponent,
+    RecoverPasswordComponent
   ]
 })
 export class SharedModule { }

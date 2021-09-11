@@ -19,6 +19,8 @@ export class UserService {
   private showVerifyOTPSub = new BehaviorSubject<{requestOTP: boolean, otpMailId: string }>({requestOTP: false, otpMailId: null});
   public readonly showVerifyOTPObs: Observable<{requestOTP: boolean, otpMailId: string }> = this.showVerifyOTPSub.asObservable();
 
+  public showChangePassSub = new BehaviorSubject<boolean>(false);
+
   private notify: NotificationMesg = {
     errorEvent: NoteEvent.Auth,
     mesg: "",
@@ -113,6 +115,33 @@ export class UserService {
     this.notify.mesg = "You are logged out!";
     this.notify.errorEvent = NoteEvent.Client;
     this.notifyServ.showError(this.notify);
+  }
+
+  getPasswordChangeOTP(email: string): Observable<any>{    
+    return this.apiService.post(this.constructUrl('change-pass-otp'), {email: email})
+        .pipe(map(resp => {             
+          if(resp.status == 1) {    
+            //this.login(this.loggedInUser).subscribe();       
+            // this.notify.mesg = "You have successfully logged in!";
+            // this.notify.errorEvent = NoteEvent.Server
+            // this.notifyServ.showError(this.notify);
+            // this.showVerifyOTPSub.next({requestOTP: false, otpMailId: null});
+            return true;
+          }          
+      }))  
+  }
+
+  changePasswordByOTP(email: string, otp: string, newPass: string): Observable<any>{    
+    return this.apiService.post(this.constructUrl('change-pass-by-otp'), {email: email, otp: otp, newPassword: newPass})
+        .pipe(map(resp => {             
+          if(resp.status == 1) {   
+            this.notify.mesg = "Your password has been changed successfully! Please use the new password to login.";
+            this.notify.errorEvent = NoteEvent.Server
+            this.notifyServ.showError(this.notify);
+            this.showVerifyOTPSub.next({requestOTP: false, otpMailId: null});
+            return true;
+          }          
+      }))  
   }
 
   private promptOTPRequest(otpMailId: string) {

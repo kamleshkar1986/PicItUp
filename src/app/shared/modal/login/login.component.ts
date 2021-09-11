@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NoteEvent, NotificationMesg, NotificationService, NotificationType } from '@core/services/error';
+import { UserService } from '@data/services/user.service';
 import { Subscription } from 'rxjs';
 
 export enum AuthMode {
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   @ViewChild('closebutton', {static: true}) closebutton: ElementRef;
   
-  constructor(private notify: NotificationService, private cd: ChangeDetectorRef) { }
+  constructor(private notify: NotificationService, private cd: ChangeDetectorRef, private userServ: UserService) { }
 
   ngOnInit() {
     this.authMode = AuthMode.SignIn;
@@ -41,7 +42,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       if(this.errMesg.mesgType == NotificationType.Success) {
         this.closebutton.nativeElement.click(); 
         this.showPopUp = false;
-      }          
+      }
+      else if(this.errMesg.errorEvent == NoteEvent.Auth ) {
+        this.showPopUp = true;
+      }         
       this.cd.detectChanges();
     });   
   }
@@ -59,4 +63,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.alertSub.unsubscribe();
   }
 
+  openPasswordChange() {
+    this.userServ.showChangePassSub.next(true);
+    this.closebutton.nativeElement.click(); 
+  }
 }

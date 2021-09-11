@@ -13,6 +13,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/core": "^12.2.5",
+    "@angular-devkit/schematics": "^12.2.5",
     "@angular/common": "~12.0.1",
     "@angular/core": "~12.0.1",
     "@angular/forms": "~12.0.1",
@@ -20,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~12.0.1",
     "@angular/router": "~12.0.1",
     "@ionic/angular": "^5.5.2",
+    "@schematics/angular": "^12.2.5",
     "angular-cli-ghpages": "^1.0.0-rc.2",
     "bootstrap": "^5.0.2",
     "font-awesome": "^4.7.0",
