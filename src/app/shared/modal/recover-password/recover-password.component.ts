@@ -61,12 +61,8 @@ export class RecoverPasswordComponent implements OnInit, OnDestroy {
     }
   }
 
-  submitOTP() {    
-   
-  }
-
   resendOTP() {
-   
+    this.otpSent = false;
   }
 
   ngOnDestroy() {
