@@ -6,6 +6,7 @@ import { ApiService, JwtService } from '@core/services';
 import { User } from '../schema/user';
 import { catchError, map } from 'rxjs/operators';
 import { NoteEvent, NotificationMesg, NotificationService, NotificationType } from '@core/services/error';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,8 @@ export class UserService {
   constructor (
     private apiService: ApiService,
     private notifyServ: NotificationService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private route: Router
   ) {}
 
   private constructUrl(apiAction: String) {
@@ -112,6 +114,7 @@ export class UserService {
     this.loggedInUser = null;
     this.loggedInUserSub.next(this.loggedInUser); 
     this.jwtService.destroyToken();
+    this.route.navigate(['/home']);
     this.notify.mesg = "You are logged out!";
     this.notify.errorEvent = NoteEvent.Client;
     this.notifyServ.showError(this.notify);

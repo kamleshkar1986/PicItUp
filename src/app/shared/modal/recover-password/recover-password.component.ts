@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '@data/services/user.service';
 import { Subscription } from 'rxjs';
@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './recover-password.component.html',
   styleUrls: ['./recover-password.component.scss'],
 })
-export class RecoverPasswordComponent implements OnInit {
+export class RecoverPasswordComponent implements OnInit, OnDestroy {
 
   showPopUp: boolean = true;
   otpSent: boolean = false;
@@ -18,13 +18,13 @@ export class RecoverPasswordComponent implements OnInit {
   invalidInput: boolean = false;
   message: string = null;
   //passChanModel: { otp: string, newPassword: string } = null;
-  userSub: Subscription;
+  private userSub: Subscription;
 
   constructor(private userServ: UserService) { }
 
   ngOnInit() {   
     this.dispPopUp(false);
-    this.userServ.showChangePassSub.subscribe(show => {
+    this.userSub = this.userServ.showChangePassSub.subscribe(show => {
       this.dispPopUp(show);
     });
   }
@@ -67,6 +67,10 @@ export class RecoverPasswordComponent implements OnInit {
 
   resendOTP() {
    
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe()
   }
 
 }

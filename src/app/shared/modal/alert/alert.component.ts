@@ -24,7 +24,7 @@ export class AlertComponent implements OnInit, OnDestroy {
  
   ngOnInit() {
     this.alertSub = this.notify.errorPopUp.subscribe(message => {  
-      this.showModal = false;  
+      this.showModal = false;        
       if(
           message.mesgType != NotificationType.None && 
           (message.errorEvent == NoteEvent.Server || message.errorEvent == NoteEvent.Client)
@@ -38,10 +38,10 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   closeAlert() {
     this.showModal = false;
-    this.cd.detectChanges();
+    this.notify.showError({mesg : "", mesgHead: "", errorEvent: "", mesgType: NotificationType.None});    
   }
 
-  ngOnDestroy() {
+  ngOnDestroy() {   
     this.alertSub.unsubscribe();
   }
 

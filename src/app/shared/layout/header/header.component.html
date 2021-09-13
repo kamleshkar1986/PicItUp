@@ -22,9 +22,16 @@
         </div>
         <div class="row">
           <div class="col">
-            <button id="btnAccount" class="btn btn-link fw-bold" 
-              [attr.data-bs-toggle]="!isAuthenticated? 'modal' : 'dropdown'" 
-              [attr.data-bs-target]="!isAuthenticated? '#exampleModal' : null"   
+            <button *ngIf="!isAuthenticated" id="btnAccount" class="btn btn-link fw-bold" 
+              data-bs-toggle="modal" 
+              data-bs-target="#exampleModal"   
+              aria-expanded="false"  
+              role="button"         
+              type="submit">
+              My Account <i class="fa fa-angle-down"></i>
+            </button>  
+            <button *ngIf="isAuthenticated"  id="btnAccount" class="btn btn-link fw-bold" 
+              data-bs-toggle="dropdown"               
               aria-expanded="false"  
               role="button"         
               type="submit">
