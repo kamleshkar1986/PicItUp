@@ -7,7 +7,18 @@ export interface User {
 	isConfirmed: boolean,
 	confirmOTP: string,
 	otpTries: number,
-	status: boolean
+	status: boolean,
+	mobile: string,
+	address: UserAddress
+}
+
+export interface UserAddress {
+	pinCode: string,
+	building: string,
+	area: string,
+	landmark: string,
+	city: string,
+	state: string
 }
 
 // export class User {

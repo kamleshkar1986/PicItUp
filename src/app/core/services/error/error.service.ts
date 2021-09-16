@@ -41,7 +41,10 @@ export class ErrorService {
                 }   
                 if(error.url.includes('change-pass')) {
                    noteMesg.errorEvent = NoteEvent.Server; 
-                }                        
+                } 
+                if(!error.url.includes('auth')) {
+                    noteMesg.errorEvent = NoteEvent.Server; 
+                 }                         
             }                      
         }
         noteMesg.mesgHead = "Oops!"

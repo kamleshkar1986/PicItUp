@@ -38,9 +38,10 @@ import { RecoverPasswordComponent } from './modal/recover-password/recover-passw
   exports: [
     HeaderComponent,
     FooterComponent,
-    LoginComponent,
+    LoginComponent,    
     VerifyOtpComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    MustMatchDirective
   ]
 })
 export class SharedModule { }

@@ -40,6 +40,10 @@ export class UserService {
     return `/auth/${apiAction}/`;
   }
 
+  private constructUserUrl(apiAction: String) {
+    return `/user/${apiAction}/`;
+  }
+
 
   register(user: User): Observable<any> { 
       this.setLoggedInUserData(user);     
@@ -112,9 +116,9 @@ export class UserService {
 
   logout() {
     this.loggedInUser = null;
-    this.loggedInUserSub.next(this.loggedInUser); 
-    this.jwtService.destroyToken();
     this.route.navigate(['/home']);
+    this.loggedInUserSub.next(this.loggedInUser); 
+    this.jwtService.destroyToken();    
     this.notify.mesg = "You are logged out!";
     this.notify.errorEvent = NoteEvent.Client;
     this.notifyServ.showError(this.notify);
@@ -145,6 +149,22 @@ export class UserService {
             return true;
           }          
       }))  
+  }
+
+  updateProfile(user: User): Observable<any> {       
+    console.log(user);   
+    return this.apiService.post(this.constructUserUrl('update-profile'), user)
+      .pipe(map(resp => {
+        if(resp.status == 1) {
+          this.notify.mesg = "Your profile has been updated successfully!";
+            this.notify.errorEvent = NoteEvent.Server
+            this.notifyServ.showError(this.notify);    
+            this.loggedInUser = user;      
+            this.loggedInUserSub.next(this.loggedInUser);        
+            localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));           
+            return true;
+        }              
+    }));    
   }
 
   private promptOTPRequest(otpMailId: string) {

@@ -1,0 +1,117 @@
+<form name="addrForm" #addrF="ngForm" (ngSubmit)="onSubmit(addrF)">
+  <div class="row mx-1 mb-2">
+    <div class="col-4 col-sm-2 fs-6 pt-1">House no./ Company</div>
+    <div class="col-8 col-sm-4">
+      <div class="input-group m-1">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
+        <input 
+          required maxlength="50" [(ngModel)]="user?.address.building" #building="ngModel"
+          name="building" 
+          type="text" 
+          class="form-control" 
+          placeholder="House no./ Company"         
+          aria-label="House no./ Company" 
+          aria-describedby="basic-addon1"/>
+      </div>
+      <div *ngIf="addrF.submitted && building && building.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+        This is a mandatory field!
+      </div>
+    </div>
+
+    <div class="col-4 col-sm-2 fs-6 pt-2">Area/ Sector/ Village</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
+          <input 
+            required maxlength="50" [(ngModel)]="user?.address.area" #area="ngModel"
+            name="area" 
+            type="text" 
+            class="form-control" 
+            placeholder="Area"         
+            aria-label="Area" 
+            aria-describedby="basic-addon1"/>
+        </div>
+        <div *ngIf="addrF.submitted && area?.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+          This is a mandatory field!
+        </div>
+      </div>
+
+      <div class="col-4 col-sm-2 fs-6 pt-2">Landmark</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
+          <input 
+            required maxlength="50" [(ngModel)]="user?.address.landmark" #landmark="ngModel"
+            name="landmark" 
+            type="text" 
+            class="form-control" 
+            placeholder="Landmark"         
+            aria-label="Landmark" 
+            aria-describedby="basic-addon1"/>
+        </div>
+        <div *ngIf="addrF.submitted && landmark?.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+          This is a mandatory field!
+        </div>
+      </div>
+
+      <div class="col-4 col-sm-2 fs-6 pt-2">Town/City</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
+          <input 
+            required maxlength="50" [(ngModel)]="user?.address.city" #city="ngModel"
+            name="city" 
+            type="text" 
+            class="form-control" 
+            placeholder="City"         
+            aria-label="City" 
+            aria-describedby="basic-addon1"/>
+        </div>
+        <div *ngIf="addrF.submitted && city?.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+          This is a mandatory field!
+        </div>
+      </div>
+
+      <div class="col-4 col-sm-2 fs-6 pt-2">State</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
+          <input 
+            required maxlength="50" [(ngModel)]="user?.address.state" #state="ngModel"
+            name="state" 
+            type="text" 
+            class="form-control" 
+            placeholder="State"         
+            aria-label="State" 
+            aria-describedby="basic-addon1"/>
+        </div>
+        <div *ngIf="addrF.submitted && state?.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+          This is a mandatory field!
+        </div> 
+      </div>
+
+      <div class="col-4 col-sm-2 fs-6 pt-2">PIN Code</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
+          <input 
+            required maxlength="50" [(ngModel)]="user?.address.pinCode" #pin="ngModel"
+            name="pin" 
+            type="text" 
+            class="form-control" 
+            placeholder="Pin Code"         
+            aria-label="Pin Code" 
+            aria-describedby="basic-addon1"/>
+        </div>
+        <div *ngIf="addrF.submitted && pin?.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+          This is a mandatory field!
+        </div>  
+      </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 fs-6 m-1 text-center">
+      <button class="btn btn-light text-dark shadow-lg fw-bold" >Save Address</button>      
+    </div>
+  </div>
+</form>

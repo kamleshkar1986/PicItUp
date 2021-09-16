@@ -1,0 +1,13 @@
+form {
+    color: #89817e;
+    
+    .ng-invalid.ng-touched {
+        border-color: red;
+        border-width: 0.15rem;
+        background-color:#ff7bae;
+    }    
+
+    .alert {
+        width:fit-content; 
+    }
+} 

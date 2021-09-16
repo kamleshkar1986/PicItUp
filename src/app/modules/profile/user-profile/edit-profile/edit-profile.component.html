@@ -1,0 +1,97 @@
+<form name="profileForm" #profF="ngForm"  [mustMatch]="['mobile', 'conf-mobile']" (ngSubmit)="onSubmit(profF)">
+  <div class="row mx-1 mb-2">
+    <div class="col-4 col-sm-2 fs-6 pt-1">First Name</div>
+    <div class="col-8 col-sm-4">
+      <div class="input-group m-1">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+        <input 
+          required maxlength="50" [(ngModel)]="editUser.firstName" #firstName="ngModel"
+          name="firstName" 
+          type="text" 
+          class="form-control" 
+          placeholder="First Name"         
+          aria-label="First Name" 
+          aria-describedby="basic-addon1"/>
+      </div>
+      <div *ngIf="profF.submitted && firstName.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+        Please enter valid first name!
+      </div>
+    </div>
+
+    <div class="col-4 col-sm-2 fs-6 pt-2">Last Name</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+          <input 
+            required maxlength="50" [(ngModel)]="editUser.lastName" #lastName="ngModel"
+            name="lastName" 
+            type="text" 
+            class="form-control" 
+            placeholder="Last Name"         
+            aria-label="Last Name" 
+            aria-describedby="basic-addon1"/>
+        </div>
+        <div *ngIf="profF.submitted && lastName.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+          Please enter valid last name!
+        </div>
+      </div>
+
+      <div class="col-4 col-sm-2 fs-6 pt-2">Mobile</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i></span>
+          <input 
+            name="mobile"
+            minlength="10"
+            maxlength="10"    
+            required
+            pattern="\d*"                              
+            [(ngModel)]="editUser.mobile" 
+            #mobile="ngModel"
+            type="password" class="form-control" placeholder="Mobile No. (10 digit)" aria-label="mobile" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="profF.submitted && mobile.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+          Please enter valid mobile number!
+        </div>
+      </div>
+
+      <div class="col-4 col-sm-2 fs-6 pt-2">Confirm Mobile</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i></span>
+          <input 
+            name="conf-mobile"
+            minlength="10"
+            maxlength="10"   
+            ngModel
+            required
+            pattern="\d*"  
+            ngModel #confMob="ngModel"  
+            type="text" class="form-control" placeholder="Mobile No. (10 digit)" aria-label="mobile" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="profF.submitted && confMob.invalid" class="alert alert-danger col-12 px-2 py-0 mx-3 my-0">
+          Confirm mobile number did not match!
+        </div>
+      </div>
+
+      <div class="col-4 col-sm-2 fs-6 pt-2">Email ID</div>
+      <div class="col-8 col-sm-4">
+        <div class="input-group m-1">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+          <input   
+            name="email"
+            readonly          
+            class="form-control"                   
+            aria-label="EMail" 
+            [(ngModel)]="editUser.email" 
+            aria-describedby="basic-addon1"/>
+        </div>      
+      </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 fs-6 m-1 text-center">
+      <button class="btn btn-light text-dark shadow-lg fw-bold" >Update Profile</button>      
+    </div>
+  </div>
+</form>

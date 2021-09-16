@@ -9,6 +9,8 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 import { SharedModule } from '@shared/shared.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EditProfileComponent } from './user-profile/edit-profile/edit-profile.component';
+import { EditAddressComponent } from './user-profile/edit-address/edit-address.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
   ],
   declarations: [
     ProfilePage,
-    UserProfileComponent
+    UserProfileComponent,
+    EditProfileComponent,
+    EditAddressComponent
   ]
 })
 export class ProfilePageModule {}
