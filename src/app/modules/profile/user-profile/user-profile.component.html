@@ -37,7 +37,10 @@
                     </div>
                     <div class="col-12 col-sm-6">
                         <p><span class="fw-bold">Mobile</span>: +91 {{user.mobile}}</p>
-                    </div>                    
+                    </div> 
+                    <div class="col-12 col-sm-6">
+                        <p><a (click)="openPasswordChange()"> <i class="fa fa-edit"></i>Change Password</a></p>
+                    </div>                                    
                 </div>
             </div>
         </div>
@@ -53,6 +56,13 @@
     <div class="panel">
         <div class="panel-body bio-graph-info">
             <h1 class="fw-bold">Delivery Address (India Only)</h1>
+            <div class="col-12 col-sm-6 mb-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <!-- <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li> -->
+                    <li><a (click)="toggleEditAddress()"> <i class="fa fa-edit"></i>{{!user?.address?.pinCode ? "Add" : "Update"}} Address</a></li>
+                </ul>
+            </div>
             <div *ngIf="!showEditAddress" class="row">
                 <!-- <app-edit-profile></app-edit-profile> -->
                 <div *ngIf="user?.address?.pinCode"  class="col-12">
@@ -64,13 +74,6 @@
                     <p><span class="fw-bold">Pin: {{user?.address?.pinCode}}</span></p>
                     <p><span class="fw-bold">Contact: {{user.mobile}}</span></p>
                 </div>  
-                </div>
-                <div class="col-12 col-sm-6">
-                    <ul class="nav nav-pills nav-stacked">
-                        <!-- <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li> -->
-                        <li><a (click)="toggleEditAddress()"> <i class="fa fa-edit"></i>{{!user?.address?.pinCode ? "Add" : "Update"}} Address</a></li>
-                    </ul>
                 </div>
             </div>
         </div>

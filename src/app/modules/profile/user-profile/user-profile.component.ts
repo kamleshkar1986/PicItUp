@@ -50,6 +50,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.toggleEditAddress();
   }
 
+  openPasswordChange() {
+    this.userServ.showChangePassSub.next(true);    
+  }
+
   ngOnDestroy() {
     this.userSub.unsubscribe();
   }

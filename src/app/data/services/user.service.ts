@@ -3,7 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
 import { ApiService, JwtService } from '@core/services';
-import { User } from '../schema/user';
+import { User, UserAddress } from '../schema/user';
 import { catchError, map } from 'rxjs/operators';
 import { NoteEvent, NotificationMesg, NotificationService, NotificationType } from '@core/services/error';
 import { Router } from '@angular/router';
@@ -122,6 +122,7 @@ export class UserService {
     this.notify.mesg = "You are logged out!";
     this.notify.errorEvent = NoteEvent.Client;
     this.notifyServ.showError(this.notify);
+    localStorage.removeItem('loggedInUser');    
   }
 
   getPasswordChangeOTP(email: string): Observable<any>{    
@@ -151,8 +152,7 @@ export class UserService {
       }))  
   }
 
-  updateProfile(user: User): Observable<any> {       
-    console.log(user);   
+  updateProfile(user: User): Observable<any> {    
     return this.apiService.post(this.constructUserUrl('update-profile'), user)
       .pipe(map(resp => {
         if(resp.status == 1) {
@@ -160,6 +160,21 @@ export class UserService {
             this.notify.errorEvent = NoteEvent.Server
             this.notifyServ.showError(this.notify);    
             this.loggedInUser = user;      
+            this.loggedInUserSub.next(this.loggedInUser);        
+            localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));           
+            return true;
+        }              
+    }));    
+  }
+
+  updateAddress(addr: UserAddress) {
+    return this.apiService.post(this.constructUserUrl('update-address'), {email: this.loggedInUser.email, ...addr})
+      .pipe(map(resp => {
+        if(resp.status == 1) {
+          this.notify.mesg = "Your deliver address has been updated successfully!";
+            this.notify.errorEvent = NoteEvent.Server
+            this.notifyServ.showError(this.notify);    
+            this.loggedInUser.address = addr;      
             this.loggedInUserSub.next(this.loggedInUser);        
             localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));           
             return true;

@@ -24,13 +24,17 @@ export class RecoverPasswordComponent implements OnInit, OnDestroy {
 
   ngOnInit() {   
     this.dispPopUp(false);
-    this.userSub = this.userServ.showChangePassSub.subscribe(show => {
+    this.userSub = this.userServ.showChangePassSub.subscribe(show => {    
       this.dispPopUp(show);
     });
   }
 
   dispPopUp(show: boolean) {
     this.showPopUp = show;
+  }
+
+  closePopUp() {
+    this.userServ.showChangePassSub.next(false);
   }
 
   submitEmail() {

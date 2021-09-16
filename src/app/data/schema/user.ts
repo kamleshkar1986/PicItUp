@@ -2,7 +2,7 @@ export interface User {
 	firstName: string,
 	lastName: string,
 	email: string,
-	deliveryAddress: string,
+	deliveryAddress: UserAddress,
 	password: string,
 	isConfirmed: boolean,
 	confirmOTP: string,
