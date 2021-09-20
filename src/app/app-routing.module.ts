@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'product/:sno',
+    loadChildren: () => import('./modules/product/product.module').then( m => m.ProductPageModule)
   }
 ];
 

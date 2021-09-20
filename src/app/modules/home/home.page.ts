@@ -13,9 +13,11 @@ export class HomePage implements OnInit {
   constructor(private prodService: ProductService) { }
  
   ngOnInit() {   
-    this.prodService.get()
-    .subscribe(prod => {
-      this.products = prod;    
-    });
+    this.prodService.productsObs.subscribe(loaded => {
+      if(loaded) {        
+        this.products = this.prodService.productList;
+        //this.cd.detectChanges();
+      }
+    });    
   }
 }
