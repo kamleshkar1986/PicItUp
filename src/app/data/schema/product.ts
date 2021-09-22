@@ -4,6 +4,7 @@ export interface Product {
 	description: string;
 	price: number;
 	dispColor: string;
+	aspectRatio: string;
 	tileImgFile: string;
 	carousalImgFile: string;
   }

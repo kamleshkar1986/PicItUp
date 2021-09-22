@@ -8,6 +8,8 @@ import { ProductPageRoutingModule } from './product-routing.module';
 
 import { ProductPage } from './product.page';
 import { SharedModule } from '@shared/shared.module';
+import { UploadPhotosComponent } from './upload-photos/upload-photos.component';
+import { ImageCropperModule } from "ngx-image-cropper";
 
 @NgModule({
   imports: [
@@ -15,8 +17,12 @@ import { SharedModule } from '@shared/shared.module';
     FormsModule,
     IonicModule,
     SharedModule,
-    ProductPageRoutingModule
+    ProductPageRoutingModule,
+    ImageCropperModule
   ],
-  declarations: [ProductPage]
+  declarations: [
+    ProductPage,
+    UploadPhotosComponent
+  ]
 })
 export class ProductPageModule {}

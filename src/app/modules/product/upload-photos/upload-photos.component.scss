@@ -1,0 +1,40 @@
+.buttons {
+    margin-top: 15px
+}
+
+.buttons .btn {
+    height: 46px
+}
+
+.buttons .cart {
+    border-color: #ff7676;
+    color: #ff7676
+}
+
+.buttons .cart:hover {
+    background-color: #e86464 !important;
+    color: #fff
+}
+
+.upload {
+    color: black;
+}
+
+.card {
+    background-color: #fff;    
+    border: none
+}
+
+
+.card-body {
+    padding: 0.3rem 0.3rem 0.2rem
+}
+
+.modal {
+    z-index: 2000 !important;
+    color: #000;
+}
+
+.modal-content {
+    background-color: #e1e1e1;
+}
