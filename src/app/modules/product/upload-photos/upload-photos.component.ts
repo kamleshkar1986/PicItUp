@@ -1,6 +1,17 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { ImageCroppedEvent, base64ToFile, ImageCropperComponent } from "ngx-image-cropper";
+import {
+  ImageCroppedEvent,
+  base64ToFile,
+  ImageCropperComponent,
+} from 'ngx-image-cropper';
 import { Observable } from 'rxjs';
 //import { FileUploadService } from '../../services/file-upload.service';
 
@@ -10,7 +21,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./upload-photos.component.scss'],
 })
 export class UploadPhotosComponent implements OnInit {
-
   selectedFiles?: Blob;
   progressInfos: any[] = [];
   message: string[] = [];
@@ -18,15 +28,17 @@ export class UploadPhotosComponent implements OnInit {
   previews: string[] = [];
   imageInfos?: Observable<any>;
 
-  imgChangeEvt: any = "";
-  cropImgPreview: any = "";
+  imgChangeEvt: any = '';
+  cropImgPreview: any = '';
 
   @Input() height: number;
   @Input() width: number;
+  @Input() price: number;
 
-  @ViewChild('openModal', {static: true}) openModal: ElementRef;
-  @ViewChild('closeModal', {static: true}) closeModal: ElementRef;
-  @ViewChild('cropper', {static: true}) private cropper: ImageCropperComponent;
+  @ViewChild('openModal', { static: true }) openModal: ElementRef;
+  @ViewChild('closeModal', { static: true }) closeModal: ElementRef;
+  @ViewChild('cropper', { static: true })
+  private cropper: ImageCropperComponent;
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -44,20 +56,20 @@ export class UploadPhotosComponent implements OnInit {
     if (this.selectedFiles) {
       // const numberOfFiles = this.selectedFiles.length;
       // for (let i = 0; i < numberOfFiles; i++) {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = (e: any) => {
-          this.previews.push(e.target.result);
-        };
+      reader.onload = (e: any) => {
+        this.previews.push(e.target.result);
+      };
 
-        reader.readAsDataURL(this.selectedFiles);
+      reader.readAsDataURL(this.selectedFiles);
       // }
     }
   }
 
   onFileChange(event: any): void {
     console.log('fileChanged');
-    this.openModal.nativeElement.click();     
+    this.openModal.nativeElement.click();
     this.imgChangeEvt = event;
     this.cd.detectChanges();
   }
@@ -70,7 +82,7 @@ export class UploadPhotosComponent implements OnInit {
 
   cropPhoto() {
     this.cropper.crop();
-    this.closeModal.nativeElement.click(); 
+    this.closeModal.nativeElement.click();
   }
 
   imgLoad() {
@@ -119,5 +131,4 @@ export class UploadPhotosComponent implements OnInit {
       // }
     }
   }
-
 }

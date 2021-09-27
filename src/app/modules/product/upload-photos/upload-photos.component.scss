@@ -1,40 +1,45 @@
 .buttons {
-    margin-top: 15px
+  margin-top: 15px;
+}
+
+.total {
+  background-color: #ff7676;
+  width: fit-content;
+  color: #fff;
 }
 
 .buttons .btn {
-    height: 46px
+  height: 46px;
 }
 
 .buttons .cart {
-    border-color: #ff7676;
-    color: #ff7676
+  border-color: #ff7676;
+  color: #ff7676;
 }
 
 .buttons .cart:hover {
-    background-color: #e86464 !important;
-    color: #fff
+  background-color: #e86464 !important;
+  color: #fff;
 }
 
 .upload {
-    color: black;
+  color: black;
 }
 
 .card {
-    background-color: #fff;    
-    border: none
+  background-color: #fff;
+  border: none;
 }
 
-
 .card-body {
-    padding: 0.3rem 0.3rem 0.2rem
+  padding: 0.3rem 0.3rem 0.2rem;
 }
 
 .modal {
-    z-index: 2000 !important;
-    color: #000;
+  z-index: 2000 !important;
+  color: #000;
 }
 
 .modal-content {
-    background-color: #e1e1e1;
+  background-color: #e1e1e1;
 }
