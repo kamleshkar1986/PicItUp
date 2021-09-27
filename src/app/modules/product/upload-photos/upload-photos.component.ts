@@ -51,8 +51,6 @@ export class UploadPhotosComponent implements OnInit {
     this.progressInfos = [];
     this.selectedFiles = files;
 
-    // console.log(this.selectedFiles);
-    // console.log(this.selectedFiles[0]);
     if (this.selectedFiles) {
       // const numberOfFiles = this.selectedFiles.length;
       // for (let i = 0; i < numberOfFiles; i++) {
@@ -68,7 +66,6 @@ export class UploadPhotosComponent implements OnInit {
   }
 
   onFileChange(event: any): void {
-    console.log('fileChanged');
     this.openModal.nativeElement.click();
     this.imgChangeEvt = event;
     this.cd.detectChanges();
@@ -77,7 +74,6 @@ export class UploadPhotosComponent implements OnInit {
   cropImg(e: ImageCroppedEvent) {
     this.cropImgPreview = e.base64;
     this.selectFiles(base64ToFile(this.cropImgPreview));
-    console.log('IMage gropped');
   }
 
   cropPhoto() {
