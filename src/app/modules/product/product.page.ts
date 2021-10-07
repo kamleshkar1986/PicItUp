@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '@data/schema/product';
+import { OrderService } from '@data/services/order.service';
 import { ProductService } from '@data/services/product.service';
 import { Subscription } from 'rxjs';
 
@@ -16,6 +17,7 @@ export class ProductPage implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private prodServ: ProductService,
+    private orderServ: OrderService,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -37,6 +39,10 @@ export class ProductPage implements OnInit, OnDestroy {
       +this.product.aspectRatio.split(':')[0] /
       +this.product.aspectRatio.split(':')[0]
     );
+  }
+
+  buyNow() {
+    this.orderServ.buyNow().subscribe();
   }
 
   ngOnDestroy() {

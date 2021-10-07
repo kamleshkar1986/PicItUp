@@ -6,13 +6,15 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
 import {
   ImageCroppedEvent,
   base64ToFile,
   ImageCropperComponent,
 } from 'ngx-image-cropper';
 import { Observable } from 'rxjs';
+import { Product } from '@data/schema/product';
+import { OrderService } from '@data/services/order.service';
+import { Order } from '@data/schema/order';
 //import { FileUploadService } from '../../services/file-upload.service';
 
 @Component({
@@ -21,48 +23,48 @@ import { Observable } from 'rxjs';
   styleUrls: ['./upload-photos.component.scss'],
 })
 export class UploadPhotosComponent implements OnInit {
-  selectedFiles?: Blob;
-  progressInfos: any[] = [];
-  message: string[] = [];
-
-  previews: string[] = [];
-  imageInfos?: Observable<any>;
-
+  previews: File[] = [];
   imgChangeEvt: any = '';
   cropImgPreview: any = '';
+  order: Order = {} as Order;
 
-  @Input() height: number;
-  @Input() width: number;
-  @Input() price: number;
+  @Input() product: Product;
 
   @ViewChild('openModal', { static: true }) openModal: ElementRef;
   @ViewChild('closeModal', { static: true }) closeModal: ElementRef;
   @ViewChild('cropper', { static: true })
   private cropper: ImageCropperComponent;
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private orderServ: OrderService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    //this.imageInfos = this.uploadService.getFiles();
+    this.order.itemName = this.product.title;
+    this.order.unitPrice = this.product.price;
+    this.order.photos = [];
+    this.order.units = 0;
+    this.prepareOrder();
   }
 
-  selectFiles(files: any): void {
-    this.message = [];
-    this.progressInfos = [];
-    this.selectedFiles = files;
-
-    if (this.selectedFiles) {
-      // const numberOfFiles = this.selectedFiles.length;
-      // for (let i = 0; i < numberOfFiles; i++) {
+  selectFiles(file: File): void {
+    if (file) {
       const reader = new FileReader();
-
       reader.onload = (e: any) => {
+        const fileToUpload = this.base64ToFile(
+          e.target.result,
+          `${this.product.title}`
+        );
         this.previews.push(e.target.result);
+        this.order.photos.push(fileToUpload);
+        this.order.units = this.previews.length;
+        this.order.totalPrice = this.order.unitPrice * this.order.units;
+        this.prepareOrder();
       };
-
-      reader.readAsDataURL(this.selectedFiles);
-      // }
+      reader.readAsDataURL(file);
     }
+  }
+
+  prepareOrder() {
+    this.orderServ.prepareOrder(this.order);
   }
 
   onFileChange(event: any): void {
@@ -73,58 +75,27 @@ export class UploadPhotosComponent implements OnInit {
 
   cropImg(e: ImageCroppedEvent) {
     this.cropImgPreview = e.base64;
-    this.selectFiles(base64ToFile(this.cropImgPreview));
+    this.selectFiles(
+      this.base64ToFile(this.cropImgPreview, `${this.product.title}`)
+    );
+  }
+
+  base64ToFile(dataurl, filename) {
+    var arr = dataurl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
   }
 
   cropPhoto() {
     this.cropper.crop();
     this.closeModal.nativeElement.click();
-  }
-
-  imgLoad() {
-    // display cropper tool
-  }
-
-  initCropper() {
-    // init cropper
-  }
-
-  imgFailed() {
-    // error msg
-  }
-
-  // upload(idx: number, file: File): void {
-  //   this.progressInfos[idx] = { value: 0, fileName: file.name };
-
-  //   if (file) {
-  //     this.uploadService.upload(file).subscribe(
-  //       (event: any) => {
-  //         if (event.type === HttpEventType.UploadProgress) {
-  //           this.progressInfos[idx].value = Math.round(
-  //             (100 * event.loaded) / event.total
-  //           );
-  //         } else if (event instanceof HttpResponse) {
-  //           const msg = 'Uploaded the file successfully: ' + file.name;
-  //           this.message.push(msg);
-  //           this.imageInfos = this.uploadService.getFiles();
-  //         }
-  //       },
-  //       (err: any) => {
-  //         this.progressInfos[idx].value = 0;
-  //         const msg = 'Could not upload the file: ' + file.name;
-  //         this.message.push(msg);
-  //       }
-  //     );
-  //   }
-  // }
-
-  uploadFiles(): void {
-    this.message = [];
-
-    if (this.selectedFiles) {
-      // for (let i = 0; i < this.selectedFiles.length; i++) {
-      //   this.upload(i, this.selectedFiles[i]);
-      // }
-    }
   }
 }
