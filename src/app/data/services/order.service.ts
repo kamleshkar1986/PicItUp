@@ -61,7 +61,9 @@ export class OrderService {
       .pipe(
         map((order) => {
           if (order.status == 1) {
-            //Todo
+            this.notify.mesg = `You order for ${this.orderData.itemName} has been placed successfully!`;
+            this.notify.errorEvent = NoteEvent.Server;
+            this.notifyServ.showError(this.notify);
           }
         })
       );
