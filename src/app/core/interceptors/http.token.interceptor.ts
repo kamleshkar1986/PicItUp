@@ -24,13 +24,8 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.spinnerServ.toggleSpinner(true);
-    console.log(req);
 
-    const headersConfig = {
-      //'Content-Type': 'application/json',
-      //Accept: 'application/json',
-      //Authorization: '',
-    };
+    const headersConfig = {};
 
     const token = this.jwtService.getToken();
     if (token) {
@@ -40,7 +35,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     if (req.body?.toString() !== '[object FormData]') {
       headersConfig['Content-Type'] = 'application/json';
       headersConfig['Accept'] = 'application/json';
-    } ///todo
+    }
 
     const request = req.clone({ setHeaders: headersConfig });
     return next.handle(request).pipe(

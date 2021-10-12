@@ -42,7 +42,7 @@ export class AuthGuard implements CanActivate {
       errorEvent: NoteEvent.AuthGuardFail,
       mesgType: NotificationType.Error,
     } as NotificationMesg);
-    this.router.createUrlTree(['/home']);
+    this.router.navigate(['/home']);
     return false;
   }
 }

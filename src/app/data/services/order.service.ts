@@ -11,6 +11,7 @@ import {
   NotificationService,
   NotificationType,
 } from '@core/services/error';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,8 @@ export class OrderService {
 
   constructor(
     private apiService: ApiService,
-    private notifyServ: NotificationService
+    private notifyServ: NotificationService,
+    private userServ: UserService
   ) {}
 
   private constructUrl(apiAction: String) {
@@ -64,6 +66,22 @@ export class OrderService {
             this.notify.mesg = `You order for ${this.orderData.itemName} has been placed successfully!`;
             this.notify.errorEvent = NoteEvent.Server;
             this.notifyServ.showError(this.notify);
+          }
+        })
+      );
+  }
+
+  getUserOrders(): Observable<any> {
+    const params = new HttpParams().append(
+      'email',
+      this.userServ.loggedInUser.email
+    );
+    return this.apiService
+      .get(this.constructUrl('get-user-orders'), params)
+      .pipe(
+        map((orders) => {
+          if (orders.status == 1) {
+            console.log(orders.data);
           }
         })
       );
