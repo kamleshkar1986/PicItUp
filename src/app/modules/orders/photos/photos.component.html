@@ -1,0 +1,57 @@
+<div class="modal fade" [attr.id]="'photoModal-' + index" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg rounded-3">
+      <div
+        class="
+          modal-header
+          fs-3
+          fw-bold
+          justify-content-center
+          text-center
+          border-bottom-0
+        "
+      >
+        {{ order.itemName }} - Order Items
+      </div>
+      <div class="modal-body p-0">
+        <div class="container-fluid">
+          <div class="row justify-content-center text-dark">
+            <!-- Gallery -->
+            <!-- <div class="row">
+              <div
+                *ngFor="let photoGroup of toMatrix(this.order.photos, 2)"
+                class="col-6 col-sm-3 px-1 p-0"
+              >
+                <img
+                  *ngFor="let photo of photoGroup"
+                  src="{{ getPhotoURL(photo) }}"
+                  class="w-100 shadow-1-strong rounded mb-2"
+                  alt=""
+                />
+              </div>
+            </div> -->
+            <div class="row">
+              <div
+                *ngFor="let photo of this.order.photos"
+                class="col-6 col-sm-4 col-md-3 px-1 p-0"
+              >
+                <img
+                  src="{{ getPhotoURL(photo) }}"
+                  class="w-100 shadow-1-strong rounded mb-2"
+                  alt=""
+                />
+              </div>
+            </div>
+            <!-- Gallery -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer pt-0 border-top-0 justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <!--<button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

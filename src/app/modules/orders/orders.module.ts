@@ -8,6 +8,7 @@ import { OrdersPageRoutingModule } from './orders-routing.module';
 
 import { OrdersPage } from './orders.page';
 import { SharedModule } from '@shared/shared.module';
+import { PhotosComponent } from './photos/photos.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { SharedModule } from '@shared/shared.module';
     OrdersPageRoutingModule,
     SharedModule,
   ],
-  declarations: [OrdersPage],
+  declarations: [OrdersPage, PhotosComponent],
 })
 export class OrdersPageModule {}

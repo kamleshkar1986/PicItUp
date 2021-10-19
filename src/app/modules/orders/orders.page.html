@@ -16,45 +16,63 @@
         </div>
       </div>
       <div class="card-body">
-        <!-- <div class="row justify-content-between mb-3">
-          <div class="col-auto">
-            <h6 class="color-1 mb-0 change-color">Receipt</h6>
-          </div>
-          <div class="col-auto">
-            <small>Receipt Voucher : 1KAU9-84UIL</small>
-          </div>
-        </div> -->
-        <div class="row">
+        <div *ngFor="let order of orderList; index as i" class="row mb-3">
+          <app-photos [order]="order" [index]="i"></app-photos>
           <div class="col">
-            <div class="card card-2">
+            <div class="card card-2 item-card">
               <div class="card-body">
                 <div class="media">
                   <div class="media-body text-right">
                     <div class="row">
-                      <div class="col text-center">
-                        <img
+                      <div class="col-6 col-sm-4 text-center">
+                        <div
+                          style="background-image: linear-gradient(rgba(0,0,0, 0.36),rgba(0,0,0, 0.20)),url('assets/images/cards/{{getFileName(order.itemName)}}');"
                           class="
-                            img-fluid
-                            align-self-center
-                            mr-2 mr-md-4
-                            pl-0
-                            p-0
-                            m-0
+                            mb-0
+                            fw-bold
+                            prod-img
+                            my-2
+                            w-100
+                            rounded-3
+                            pt-5
                           "
-                          src="https://i.imgur.com/RJOW4BL.jpg"
-                          width="135"
-                          height="135"
-                        />
-                        <!-- </div>
-                      <div class="col"> -->
-                        <div class="mb-0">Jack Jacs</div>
+                        >
+                          {{order.itemName}}
+                        </div>
                       </div>
                       <!-- <div class="col-3">
                         <small>Golden Rim </small>
                       </div> -->
-                      <div class="col py-4 text-center">12 Photos</div>
+                      <div class="col-6 col-sm-4 py-4 text-center">
+                        <button
+                          class="btn btn-link fw-bold"
+                          data-bs-toggle="modal"
+                          [attr.data-bs-target]="'#photoModal-'+i"
+                          aria-expanded="false"
+                          role="button"
+                          type="submit"
+                        >
+                          View {{order.units}} Photos
+                        </button>
+                      </div>
                       <!-- <div class="col-2"><small>Qty : 1</small></div> -->
-                      <div class="col py-4 text-center">3,600.00</div>
+                      <div class="col-12 col-sm-4 my-4 text-center">
+                        <span class="rounded-3 p-1 order-amount"
+                          >₹ {{order.totalPrice.toFixed(2) }}</span
+                        >
+                      </div>
+                      <div class="col-12 py-4 text-center d-none">
+                        <button
+                          class="btn btn-link fw-bold"
+                          data-bs-toggle="modal"
+                          [attr.data-bs-target]="'#photoModal-'+i"
+                          aria-expanded="false"
+                          role="button"
+                          type="submit"
+                        >
+                          View Order Items
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -63,7 +81,7 @@
                   <div class="col mb-3 justify-content-center text-center">
                     <small class="fw-bold"> Order Status : </small>
                     <small class="status rounded-3 p-1 mt-2">
-                      Out for delivery
+                      {{order.orderStatus}}
                     </small>
                   </div>
                 </div>

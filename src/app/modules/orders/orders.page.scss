@@ -18,6 +18,20 @@
   width: inherit;
 }
 
+.item-card {
+  background-color: #e6e6e6;
+}
+
+.prod-img {
+  height: 100%;
+  background-position: right center;
+  color: #fff;
+}
+
+.order-amount {
+  background-color: #dd6e6e;
+  color: #fff;
+}
 .size span {
   font-size: 11px;
 }
@@ -53,4 +67,66 @@
 
 .qty i {
   font-size: 11px;
+}
+
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
+.modal {
+  z-index: 4000 !important;
+}
+
+.icon-box {
+  font-size: 5rem;
+}
+
+.error-bg {
+  background-color: #f15e5e;
+}
+.succ-bg {
+  background-color: #47c9a2;
+}
+
+.modal-body {
+  background-color: #ffffff;
+  color: #000000 !important;
+}
+
+.modal-confirm .modal-content {
+  background-color: #47c9a2;
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+}
+
+.modal-header {
+  color: rgb(61, 58, 218) !important;
+}
+
+.btn-outline {
+  color: black !important;
+  border-color: black;
+}
+
+.btn-link {
+  color: #00badb;
+}
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
+.modal-content {
+  background-color: $blue-300;
+  .social {
+    background-color: $gray-100;
+  }
+  .btn-primary {
+    background-color: $blue-500;
+  }
+}
+
+.modal-title {
+  font-weight: 500;
 }

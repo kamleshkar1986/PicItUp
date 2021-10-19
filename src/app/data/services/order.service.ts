@@ -26,6 +26,15 @@ export class OrderService {
     mesgType: NotificationType.Success,
   };
 
+  private orders: Order[];
+  private ordersSub = new BehaviorSubject<boolean>(false);
+  public readonly ordersObs: Observable<boolean> =
+    this.ordersSub.asObservable();
+
+  public get orderList() {
+    return this.orders;
+  }
+
   prepareOrder(order: Order) {
     this.orderData = order;
   }
@@ -81,7 +90,8 @@ export class OrderService {
       .pipe(
         map((orders) => {
           if (orders.status == 1) {
-            console.log(orders.data);
+            this.orders = orders.data;
+            this.ordersSub.next(true);
           }
         })
       );
