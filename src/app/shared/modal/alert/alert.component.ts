@@ -1,5 +1,10 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { NotificationService, NotificationMesg, NotificationType, NoteEvent } from '@core/services/error';
+import {
+  NotificationService,
+  NotificationMesg,
+  NotificationType,
+  NoteEvent,
+} from '@core/services/error';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,41 +13,47 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent implements OnInit, OnDestroy {
-
-  showModal: boolean = false;  
+  showModal: boolean = false;
 
   message: NotificationMesg;
 
-  private alertSub: Subscription; 
+  private alertSub: Subscription;
 
   public get mesgType(): typeof NotificationType {
-    return NotificationType; 
+    return NotificationType;
   }
 
-  constructor(private notify: NotificationService, private cd: ChangeDetectorRef) { }
- 
- 
+  constructor(
+    private notify: NotificationService,
+    private cd: ChangeDetectorRef
+  ) {}
+
   ngOnInit() {
-    this.alertSub = this.notify.errorPopUp.subscribe(message => {  
-      this.showModal = false;        
-      if(
-          message.mesgType != NotificationType.None && 
-          (message.errorEvent == NoteEvent.Server || message.errorEvent == NoteEvent.Client)
-        ) {
-        this.showModal = true;       
-      }      
-      this.message = message;       
+    this.alertSub = this.notify.errorPopUp.subscribe((message) => {
+      this.showModal = false;
+      if (
+        message.mesgType != NotificationType.None &&
+        (message.errorEvent == NoteEvent.Server ||
+          message.errorEvent == NoteEvent.Client)
+      ) {
+        this.showModal = true;
+      }
+      this.message = message;
       this.cd.detectChanges();
     });
   }
 
   closeAlert() {
     this.showModal = false;
-    this.notify.showError({mesg : "", mesgHead: "", errorEvent: "", mesgType: NotificationType.None});    
+    this.notify.showError({
+      mesg: '',
+      mesgHead: '',
+      errorEvent: '',
+      mesgType: NotificationType.None,
+    });
   }
 
-  ngOnDestroy() {   
+  ngOnDestroy() {
     this.alertSub.unsubscribe();
   }
-
 }

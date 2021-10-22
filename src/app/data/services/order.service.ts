@@ -12,6 +12,7 @@ import {
   NotificationType,
 } from '@core/services/error';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -42,14 +43,15 @@ export class OrderService {
   constructor(
     private apiService: ApiService,
     private notifyServ: NotificationService,
-    private userServ: UserService
+    private userServ: UserService,
+    private route: Router
   ) {}
 
   private constructUrl(apiAction: String) {
     return `/order/${apiAction}/`;
   }
 
-  buyNow(): Observable<any> {
+  buyNow(toCart: boolean): Observable<any> {
     if (!this.orderData?.photos || this.orderData.photos.length <= 0) {
       throw new Error('Please choose some photos to buy!');
     }
@@ -67,24 +69,29 @@ export class OrderService {
       );
     }
 
+    let actionPath: string = 'buy-now';
+    if (toCart) {
+      actionPath = 'add-to-cart';
+    }
+
     return this.apiService
-      .postWithFile(this.constructUrl('buy-now'), postData)
+      .postWithFile(this.constructUrl(actionPath), postData)
       .pipe(
         map((order) => {
           if (order.status == 1) {
-            this.notify.mesg = `You order for ${this.orderData.itemName} has been placed successfully!`;
+            this.notify.mesg = `${this.orderData.itemName} has been added to cart!`;
             this.notify.errorEvent = NoteEvent.Server;
             this.notifyServ.showError(this.notify);
+            this.route.navigate(['/orders/' + toCart]);
           }
         })
       );
   }
 
-  getUserOrders(): Observable<any> {
-    const params = new HttpParams().append(
-      'email',
-      this.userServ.loggedInUser.email
-    );
+  getUserOrders(getCart: boolean): Observable<any> {
+    const params = new HttpParams()
+      .append('email', this.userServ.loggedInUser.email)
+      .append('getCart', getCart);
     return this.apiService
       .get(this.constructUrl('get-user-orders'), params)
       .pipe(
@@ -92,6 +99,18 @@ export class OrderService {
           if (orders.status == 1) {
             this.orders = orders.data;
             this.ordersSub.next(true);
+          }
+        })
+      );
+  }
+
+  buyFromCart(orderId: string) {
+    return this.apiService
+      .post(this.constructUrl('buy-from-cart'), { orderId: orderId })
+      .pipe(
+        map((resp) => {
+          if (resp.status == 1) {
+            return true;
           }
         })
       );

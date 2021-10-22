@@ -1,4 +1,5 @@
 export interface Order {
+  _id: string;
   itemName: string;
   units: number;
   unitPrice: number;
@@ -8,6 +9,7 @@ export interface Order {
   orderStatus: string;
   refundRequested: boolean;
   paymentStatus: string;
+  createdAt: Date;
 }
 
 export enum OrderStatus {

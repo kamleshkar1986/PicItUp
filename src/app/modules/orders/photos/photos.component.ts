@@ -14,7 +14,6 @@ export class PhotosComponent implements OnInit {
 
   ngOnInit() {
     //this.cd.detectChanges();
-    console.log('photo comp loaded');
   }
 
   getPhotoURL(val: File) {

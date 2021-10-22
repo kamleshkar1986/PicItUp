@@ -30,7 +30,8 @@ export class ErrorService {
         : errorMesg.message
         ? errorMesg.message
         : null;
-      noteMesg.errorEvent = errorMesg.message;
+      //noteMesg.errorEvent = errorMesg.message;
+      noteMesg.errorEvent = NoteEvent.Server;
     } else {
       noteMesg.mesg = errorMesg.message
         ? errorMesg.message

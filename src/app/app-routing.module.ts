@@ -30,7 +30,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'orders',
+    path: 'orders/:tocart',
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./modules/orders/orders.module').then((m) => m.OrdersPageModule),

@@ -12,7 +12,7 @@
             fw-bold
           "
         >
-          My Orders
+          My {{orderList && orderList[0]?.inCart ? "Cart": "Order"}}
         </div>
       </div>
       <div class="card-body">
@@ -43,7 +43,7 @@
                       <!-- <div class="col-3">
                         <small>Golden Rim </small>
                       </div> -->
-                      <div class="col-6 col-sm-4 py-4 text-center">
+                      <div class="col-6 col-sm-2 col-md-4 py-4 text-center">
                         <button
                           class="btn btn-link fw-bold"
                           data-bs-toggle="modal"
@@ -54,12 +54,24 @@
                         >
                           View {{order.units}} Photos
                         </button>
+                        <small class="status d-none rounded-3 p-1 mt-2">
+                          {{order.createdAt | date:'dd-MM-yyyy hh:mm a'}}
+                        </small>
                       </div>
                       <!-- <div class="col-2"><small>Qty : 1</small></div> -->
-                      <div class="col-12 col-sm-4 my-4 text-center">
-                        <span class="rounded-3 p-1 order-amount"
+                      <div class="col-12 col-sm-6 col-md-4 my-4 text-center">
+                        <span class="rounded-3 px-1 py-1 order-amount"
                           >₹ {{order.totalPrice.toFixed(2) }}</span
                         >
+                        <button
+                          *ngIf="order.inCart"
+                          class="btn btn-outline-primary fw-bold ms-4 mt-0"
+                          role="button"
+                          type="submit"
+                          (click)="buyFromCart(order._id)"
+                        >
+                          Buy Now
+                        </button>
                       </div>
                       <div class="col-12 py-4 text-center d-none">
                         <button
@@ -78,8 +90,13 @@
                 </div>
                 <hr class="my-3" />
                 <div class="row">
-                  <div class="col mb-3 justify-content-center text-center">
-                    <small class="fw-bold"> Order Status : </small>
+                  <div class="col-6 mb-3 justify-content-center text-center">
+                    <small class="status rounded-3 p-1">
+                      {{order.createdAt | date:'dd-MM-yyyy hh:mm a'}}
+                    </small>
+                  </div>
+                  <div class="col-6 mb-3 justify-content-center text-center">
+                    <small class="fw-bold"> Status : </small>
                     <small class="status rounded-3 p-1 mt-2">
                       {{order.orderStatus}}
                     </small>

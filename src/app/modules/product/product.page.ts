@@ -42,7 +42,11 @@ export class ProductPage implements OnInit, OnDestroy {
   }
 
   buyNow() {
-    this.orderServ.buyNow().subscribe();
+    this.orderServ.buyNow(false).subscribe();
+  }
+
+  addToCart() {
+    this.orderServ.buyNow(true).subscribe();
   }
 
   ngOnDestroy() {
