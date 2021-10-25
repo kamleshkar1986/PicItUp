@@ -1,0 +1,81 @@
+<div class="dropdown">
+  <button
+    #btnAcc
+    class="d-none"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    aria-expanded="false"
+    role="button"
+    type="submit"
+  >
+    My Account <i class="fa fa-angle-down"></i>
+  </button>
+  <button
+    *ngIf="!isAuthenticated"
+    id="btnAccount"
+    class="btn btn-link fw-bold d-none d-md-block"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    aria-expanded="false"
+    role="button"
+    type="submit"
+  >
+    My Account <i class="fa fa-angle-down"></i>
+  </button>
+  <button
+    *ngIf="isAuthenticated"
+    id="btnAccount"
+    class="btn btn-link fw-bold d-none d-md-block"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    role="button"
+    type="submit"
+  >
+    My Account <i class="fa fa-angle-down"></i>
+  </button>
+  <button
+    *ngIf="isAuthenticated"
+    class="bg-transparent d-block d-md-none"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <i class="fa fa-user-circle fs-3"></i>
+  </button>
+
+  <button
+    *ngIf="!isAuthenticated"
+    class="bg-transparent d-block d-md-none"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    aria-expanded="false"
+  >
+    <i class="fa fa-user-circle fs-3"></i>
+  </button>
+
+  <ul
+    *ngIf="isAuthenticated"
+    class="dropdown-menu dropdown-menu-end"
+    aria-labelledby="btnAccount"
+  >
+    <li>
+      <a
+        class="dropdown-item"
+        [replaceUrl]="true"
+        [routerLink]="['/orders/false']"
+        >My Orders</a
+      >
+    </li>
+    <li>
+      <a
+        class="dropdown-item"
+        [replaceUrl]="true"
+        [routerLink]="['/orders/true']"
+        >My Cart</a
+      >
+    </li>
+    <li>
+      <a class="dropdown-item" [routerLink]="['/profile']">Profile</a>
+    </li>
+    <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+  </ul>
+</div>

@@ -15,83 +15,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand fw-bolder ms-2 ms-md-5" href="#">PicItUp</a>
-    <div
-      class="flex-row-reverse me-2 mt-2 d-block d-md-none"
-      [attr.data-bs-toggle]="!isAuthenticated ? 'modal' : null"
-      [attr.data-bs-target]="!isAuthenticated ? '#exampleModal' : null"
-    >
-      <button class="bg-transparent">
-        <i class="fa fa-user-circle fs-3"></i>
-      </button>
-    </div>
-    <div class="flex-row-reverse me-5 mt-2 d-none d-md-block">
+    <div class="flex-row-reverse me-0 mt-2">
       <div class="row">
-        <div class="col text-primary fw-bolder">
+        <div class="col text-primary fw-bolder d-none d-md-block">
           {{ headerNote }}
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <button
-            #btnAcc
-            class="d-none"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            aria-expanded="false"
-            role="button"
-            type="submit"
-          >
-            My Account <i class="fa fa-angle-down"></i>
-          </button>
-          <button
-            *ngIf="!isAuthenticated"
-            id="btnAccount"
-            class="btn btn-link fw-bold"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            aria-expanded="false"
-            role="button"
-            type="submit"
-          >
-            My Account <i class="fa fa-angle-down"></i>
-          </button>
-          <button
-            *ngIf="isAuthenticated"
-            id="btnAccount"
-            class="btn btn-link fw-bold"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            role="button"
-            type="submit"
-          >
-            My Account <i class="fa fa-angle-down"></i>
-          </button>
-          <ul
-            *ngIf="isAuthenticated"
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="btnAccount"
-          >
-            <li>
-              <a
-                class="dropdown-item"
-                [replaceUrl]="true"
-                [routerLink]="['/orders/false']"
-                >My Orders</a
-              >
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
-                [replaceUrl]="true"
-                [routerLink]="['/orders/true']"
-                >My Cart</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/profile']">Profile</a>
-            </li>
-            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-          </ul>
+          <app-user-menu [isAuthenticated]="isAuthenticated"></app-user-menu>
           <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown button
             </button>        -->

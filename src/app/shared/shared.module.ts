@@ -14,6 +14,7 @@ import { MustMatchDirective } from './directives/must-match.directive';
 import { SpinnerComponent } from './modal/spinner/spinner.component';
 import { VerifyOtpComponent } from './modal/verify-otp/verify-otp.component';
 import { RecoverPasswordComponent } from './modal/recover-password/recover-password.component';
+import { UserMenuComponent } from './layout/header/user-menu/user-menu.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { RecoverPasswordComponent } from './modal/recover-password/recover-passw
     RecoverPasswordComponent,
     SpinnerComponent,
     VerifyOtpComponent,
-    MustMatchDirective
+    MustMatchDirective,
+    UserMenuComponent
   ],
   imports: [
     CommonModule,

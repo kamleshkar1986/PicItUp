@@ -20,16 +20,13 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean;
   headerNote: string; // = "Login / Signup";
-  products: Product[];
-  @ViewChild('btnAcc', { static: true }) btnAcc: ElementRef;
-  private userSub: Subscription;
-  private alertSub: Subscription;
+  products: Product[];  
+  private userSub: Subscription;  
   private prodSub: Subscription;
 
   constructor(
     private userServ: UserService,
-    private prodServ: ProductService,
-    private notify: NotificationService,
+    private prodServ: ProductService,    
     private cd: ChangeDetectorRef
   ) {}
 
@@ -49,23 +46,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.products = this.prodServ.productList;
         this.cd.detectChanges();
       }
-    });
-
-    this.alertSub = this.notify.errorPopUp.subscribe((message) => {
-      if (message.errorEvent == NoteEvent.AuthGuardFail) {
-        this.btnAcc.nativeElement.click();
-      }
-      this.cd.detectChanges();
-    });
-  }
-
-  logout() {
-    this.userServ.logout();
-  }
+    });    
+  }  
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
-    this.prodSub.unsubscribe();
-    this.alertSub.unsubscribe();
+    this.prodSub.unsubscribe();    
   }
 }

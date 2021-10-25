@@ -26,7 +26,7 @@ export class OrdersPage implements OnInit, OnDestroy {
     this.getOrderSubs = this.ordersServ.getUserOrders(this.forCart).subscribe();
     this.loadOrdersSubs = this.ordersServ.ordersObs.subscribe((loaded) => {
       if (loaded) {
-        this.orderList = this.ordersServ.orderList;
+        this.orderList = this.ordersServ.orderList;     
         this.cd.detectChanges();
       }
     });
