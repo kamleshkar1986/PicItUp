@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface Order {
   _id: string;
   itemName: string;
@@ -9,6 +11,9 @@ export interface Order {
   orderStatus: string;
   refundRequested: boolean;
   paymentStatus: string;
+  user: User;
+  cartDate: Date;
+  orderDate: Date;
   createdAt: Date;
 }
 

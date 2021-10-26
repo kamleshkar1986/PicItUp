@@ -79,7 +79,7 @@ export class OrderService {
       .pipe(
         map((order) => {
           if (order.status == 1) {
-            this.notify.mesg = `${this.orderData.itemName} has been added to cart!`;
+            this.notify.mesg = `${this.orderData.itemName} request has been processed!`;
             this.notify.errorEvent = NoteEvent.Server;
             this.notifyServ.showError(this.notify);
             this.route.navigate(['/orders/' + toCart]);
@@ -97,7 +97,7 @@ export class OrderService {
       .pipe(
         map((orders) => {
           if (orders.status == 1) {
-            this.orders = orders.data;           
+            this.orders = orders.data;
             this.ordersSub.next(true);
           }
         })
@@ -110,6 +110,10 @@ export class OrderService {
       .pipe(
         map((resp) => {
           if (resp.status == 1) {
+            this.notify.mesg = `${this.orderData.itemName} has been added to cart!`;
+            this.notify.errorEvent = NoteEvent.Server;
+            this.notifyServ.showError(this.notify);
+            this.route.navigate(['/orders/' + false]);
             return true;
           }
         })
