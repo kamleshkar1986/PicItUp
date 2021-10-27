@@ -4,20 +4,47 @@
   <div class="container my-5 d-flex justify-content-center">
     <div class="card card-1">
       <div class="card-header bg-white">
-        <div
-          class="
-            media
-            flex-sm-row flex-column-reverse
-            justify-content-between
-            fw-bold
-          "
-        >
-          My {{orderList && orderList[0]?.inCart ? "Cart": "Orders"}}
+        <div class="row">
+          <div
+            class="
+              col-6
+              media
+              flex-sm-row flex-column-reverse
+              justify-content-between
+              fw-bold
+            "
+          >
+            My {{orderList && orderList[0]?.inCart ? "Cart": "Orders"}}
+          </div>
+          <div class="col-3 fw-bold justify-content-right text-end">
+            Status Filter:
+          </div>
+          <div class="col-3">
+            <select
+              [(ngModel)]="orderStatus"
+              class="form-select form-select-sm fw-bold"
+              aria-label=".form-select-sm example"
+              (change)="filterOrders()"
+            >
+              <option
+                *ngFor="let status of orderStatusList"
+                class="fw-bold"
+                value="{{ status }}"
+              >
+                {{ status }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="card-body">
-        <div *ngIf="orderList?.length===0">No items available in the list.</div>
-        <div *ngFor="let order of orderList; index as i" class="row mb-3">
+        <div *ngIf="filteredOrderList?.length===0">
+          No items available in the list.
+        </div>
+        <div
+          *ngFor="let order of filteredOrderList; index as i"
+          class="row mb-3"
+        >
           <app-photos [order]="order" [index]="i"></app-photos>
           <div class="col">
             <div class="card card-2 item-card">
@@ -54,7 +81,7 @@
                           type="submit"
                         >
                           View {{order.units}} Photos
-                        </button>                        
+                        </button>
                       </div>
                       <!-- <div class="col-2"><small>Qty : 1</small></div> -->
                       <div class="col-12 col-sm-6 col-md-4 my-4 text-center">
@@ -89,8 +116,13 @@
                 <hr class="my-3" />
                 <div class="row">
                   <div class="col-6 mb-3 justify-content-center text-center">
-                    <small class="status rounded-3 p-1">
-                      {{(order.inCart ? order.cartDate: order.orderDate) | date:'dd-MM-yyyy hh:mm a'}}
+                    <small class="status rounded-3 p-1 d-none d-sm-block">
+                      {{(order.inCart ? order.cartDate: order.orderDate) |
+                      date:'dd-MM-yyyy hh:mm a'}}
+                    </small>
+                    <small class="status rounded-3 p-1 d-block d-sm-none">
+                      {{(order.inCart ? order.cartDate: order.orderDate) |
+                      date:'dd-MM-yyyy'}}
                     </small>
                   </div>
                   <div class="col-6 mb-3 justify-content-center text-center">

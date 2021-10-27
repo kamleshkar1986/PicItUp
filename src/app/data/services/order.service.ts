@@ -119,4 +119,35 @@ export class OrderService {
         })
       );
   }
+
+  updateOrderStatus(orderId: string, orderStatus: string) {
+    return this.apiService
+      .post(this.constructUrl('update-order-status'), {
+        orderId: orderId,
+        orderStatus: orderStatus,
+      })
+      .pipe(
+        map((resp) => {
+          if (resp.status == 1) {
+            this.notify.mesg = `Order status changed to ${orderStatus}!`;
+            this.notify.errorEvent = NoteEvent.Server;
+            this.notifyServ.showError(this.notify);
+            //this.route.navigate(['/orders/' + false]);
+            return true;
+          }
+        })
+      );
+  }
+
+  downloadOrderPhotos(orderId: string) {
+    return this.apiService
+      .postForDownloads(this.constructUrl('download-order-items'), {
+        orderId: orderId,
+      })
+      .pipe(
+        map((resp) => {
+          return resp;
+        })
+      );
+  }
 }

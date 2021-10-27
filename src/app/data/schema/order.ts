@@ -18,15 +18,15 @@ export interface Order {
 }
 
 export enum OrderStatus {
-  Carted, //When order is in cart
-  Suspended, //When order payment has failed
-  Placed, //Order placed (Payment must be successful)
-  Initiated, //Order finalised for making
-  Preparing, //Work In Progress
-  Prepared, //End product ready
-  Dispatched, //Dispatched for delivery
-  InTransit, //InTransit
-  Delivered, //Product delivered to customer
+  Carted = 'Carted', //When order is in cart
+  Suspended = 'Suspended', //When order payment has failed
+  Placed = 'Placed', //Order placed (Payment must be successful)
+  Initiated = 'Initiated', //Order finalised for making
+  Preparing = 'Preparing', //Work In Progress
+  Prepared = 'Prepared', //End product ready
+  Dispatched = 'Dispatched', //Dispatched for delivery
+  InTransit = 'InTransit', //InTransit
+  Delivered = 'Delivered', //Product delivered to customer
 }
 
 export enum PaymentStatus {

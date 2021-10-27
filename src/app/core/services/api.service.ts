@@ -32,6 +32,14 @@ export class ApiService {
     ); //.pipe(catchError(this.formatErrors));
   }
 
+  postForDownloads(path: string, body: Object = {}): Observable<any> {
+    return this.http.post(
+      `${environment.api_url}${path}`,
+      JSON.stringify(body),
+      { responseType: 'blob' }
+    ); //.pipe(catchError(this.formatErrors));
+  }
+
   postWithFile(path: string, data: FormData): Observable<any> {
     return this.http.post(`${environment.api_url}${path}`, data); //.pipe(catchError(this.formatErrors));
   }

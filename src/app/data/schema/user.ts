@@ -1,24 +1,25 @@
 export interface User {
-	firstName: string,
-	lastName: string,
-	email: string,
-	deliveryAddress: UserAddress,
-	password: string,
-	isConfirmed: boolean,
-	confirmOTP: string,
-	otpTries: number,
-	status: boolean,
-	mobile: string,
-	address: UserAddress
+  firstName: string;
+  lastName: string;
+  email: string;
+  deliveryAddress: UserAddress;
+  password: string;
+  isConfirmed: boolean;
+  confirmOTP: string;
+  otpTries: number;
+  status: boolean;
+  mobile: string;
+  isAdminUser: boolean;
+  address: UserAddress;
 }
 
 export interface UserAddress {
-	pinCode: string,
-	building: string,
-	area: string,
-	landmark: string,
-	city: string,
-	state: string
+  pinCode: string;
+  building: string;
+  area: string;
+  landmark: string;
+  city: string;
+  state: string;
 }
 
 // export class User {
@@ -42,6 +43,4 @@ export interface UserAddress {
 // 		private _tokenExpirationDate: Date
 // 	) {}
 
-	
 // }
-

@@ -1,18 +1,43 @@
-<div *ngIf="showModal" id="alertModal" class="modal fade show d-block" aria-modal="true">
-	<div class="modal-dialog modal-dialog-centered modal-confirm">
-		<div class="modal-content">
-			<div class="modal-header justify-content-center error" [ngClass]="{'error-bg': message.mesgType === mesgType.Error,
-			                                                             'succ-bg': message.mesgType === mesgType.Success }">
-				<div class="icon-box" [ngSwitch]="message.mesgType">					
-					<i *ngSwitchCase="mesgType.Success" class="fa fa-check-circle"></i>
-					<i *ngSwitchCase="mesgType.Error" class="fa fa-times-circle"></i>		
-				</div>			
-			</div>
-			<div class="modal-body text-center">
-				<h4>{{message.mesgHead}}</h4>	
-				<p>{{message.mesg}}</p>
-				<button class="btn btn-outline" data-bs-dismiss="modal" (click)="closeAlert()">Close</button>
-			</div>
-		</div>
-	</div>
+<div
+  *ngIf="showModal"
+  id="alertModal"
+  class="modal fade show d-block"
+  aria-modal="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+      <div
+        class="modal-header justify-content-center error"
+        [ngClass]="{
+          'error-bg': message.mesgType === mesgType.Error,
+          'succ-bg': message.mesgType === mesgType.Success
+        }"
+      >
+        <div class="icon-box" [ngSwitch]="message.mesgType">
+          <i *ngSwitchCase="mesgType.Success" class="fa fa-check-circle"></i>
+          <i *ngSwitchCase="mesgType.Error" class="fa fa-times-circle"></i>
+        </div>
+      </div>
+      <div class="modal-body text-center">
+        <h4>{{ message.mesgHead }}</h4>
+        <p>{{ message.mesg }}</p>
+        <button
+          *ngIf="message.mesg != 'You are logged out!'"
+          class="btn btn-outline"
+          data-bs-dismiss="modal"
+          (click)="closeAlert()"
+        >
+          Close
+        </button>
+        <button
+          *ngIf="message.mesg == 'You are logged out!'"
+          class="btn btn-outline"
+          data-bs-dismiss="modal"
+          onclick="location.href = '#';"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
